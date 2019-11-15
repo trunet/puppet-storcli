@@ -1,0 +1,4 @@
+---
+storcli::package_manage: true
+storcli::package_name: [ 'storcli' ]
+storcli::package_ensure: present

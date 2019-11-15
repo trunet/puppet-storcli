@@ -1,0 +1,87 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.1017.0000.0000 May 10, 2019",
+		"Operating system" : "Linux 3.10.0-957.5.1.el7.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Controller Properties" : [
+			{
+				"Ctrl_Prop" : "CC Operation Mode",
+				"Value" : "Concurrent"
+			},
+			{
+				"Ctrl_Prop" : "CC Execution Delay",
+				"Value" : "168"
+			},
+			{
+				"Ctrl_Prop" : "CC Next Starttime",
+				"Value" : "11/16/2019, 03:00:00"
+			},
+			{
+				"Ctrl_Prop" : "CC Current State",
+				"Value" : "Stopped"
+			},
+			{
+				"Ctrl_Prop" : "CC Number of iterations",
+				"Value" : "13"
+			},
+			{
+				"Ctrl_Prop" : "CC Number of VD completed",
+				"Value" : "1"
+			},
+			{
+				"Ctrl_Prop" : "CC Excluded VDs",
+				"Value" : "None"
+			}
+		]
+	}
+},
+{
+	"Command Status" : {
+		"CLI Version" : "007.1017.0000.0000 May 10, 2019",
+		"Operating system" : "Linux 3.10.0-957.5.1.el7.x86_64",
+		"Controller" : 1,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Controller Properties" : [
+			{
+				"Ctrl_Prop" : "CC Operation Mode",
+				"Value" : "Concurrent"
+			},
+			{
+				"Ctrl_Prop" : "CC Execution Delay",
+				"Value" : "168"
+			},
+			{
+				"Ctrl_Prop" : "CC Next Starttime",
+				"Value" : "11/16/2019, 03:00:00"
+			},
+			{
+				"Ctrl_Prop" : "CC Current State",
+				"Value" : "Stopped"
+			},
+			{
+				"Ctrl_Prop" : "CC Number of iterations",
+				"Value" : "13"
+			},
+			{
+				"Ctrl_Prop" : "CC Number of VD completed",
+				"Value" : "1"
+			},
+			{
+				"Ctrl_Prop" : "CC Excluded VDs",
+				"Value" : "None"
+			}
+		]
+	}
+}
+]
+}
+
