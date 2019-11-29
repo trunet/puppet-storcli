@@ -56,7 +56,7 @@ jobs:
         VERSION_METADATA=$(jq -r .version metadata.json)
         VERSION_GIT=$(echo $GITHUB_REF | sed 's/refs\/tags\/v//')
         [ "$VERSION_METADATA" != "$VERSION_GIT" ] && exit 1
-        echo '::set-output name=VERSION::$VERSION_METADATA'
+        echo "::set-output name=VERSION::$VERSION_METADATA"
 
     - name: Build
       id: build
