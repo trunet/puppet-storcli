@@ -4,6 +4,7 @@ on: [push]
 
 env:
   PUPPET_GEM_VERSION: '~> 6'
+  PDK_PUPPET_VERSION: '6'
 
 jobs:
   build:
@@ -19,6 +20,13 @@ jobs:
       with:
         ruby-version: 2.6.x
 
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+
     - name: Install dependencies
       id: install-dependencies
       run: |
@@ -28,7 +36,8 @@ jobs:
         gem update --system $RUBYGEMS_VERSION
         gem --version
         bundle -v
-        bundle install --without system_tests --path vendor/bundle --jobs 4 --retry 3
+        bundle config path vendor/bundle
+        bundle install --without system_tests --jobs 4 --retry 3
 
     - name: Validate
       id: test-validate
