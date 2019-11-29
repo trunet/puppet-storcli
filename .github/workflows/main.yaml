@@ -22,7 +22,6 @@ jobs:
     - name: Install dependencies
       id: install-dependencies
       run: |
-        sudo apt-get install jq
         gem install bundler
         bundle -v
         rm Gemfile.lock || true
