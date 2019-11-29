@@ -33,7 +33,7 @@ describe 'megaraid fact' do
       expect(Facter.fact(:megaraid).value.fetch('number_of_controllers')).to eq(0)
     end
     it 'key controllers' do
-      expect(Facter.fact(:megaraid).value.fetch('controllers')).to eq([])
+      expect(Facter.fact(:megaraid).value.fetch('controllers')).to eq({})
     end
   end
 
@@ -52,7 +52,7 @@ describe 'megaraid fact' do
       expect(Facter.fact(:megaraid).value.fetch('number_of_controllers')).to eq(0)
     end
     it 'key controllers' do
-      expect(Facter.fact(:megaraid).value.fetch('controllers')).to eq([])
+      expect(Facter.fact(:megaraid).value.fetch('controllers')).to eq({})
     end
   end
 

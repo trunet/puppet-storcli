@@ -30,9 +30,7 @@ This module makes use of storcli. The package needs to be available from some re
 ## Usage
 
 ```
-if $::megaraid.present? {
-  include storcli
-}
+include storcli
 ```
 
 ## Reference
@@ -47,8 +45,7 @@ See [REFERENCE](REFERENCE.md) for all other reference documentation.
   - **present?** - Boolean - check if /sys/bus/pci/drivers/megaraid_sas is present?
   - **storcli** - String - location of storcli application.
   - **number_of_controllers** - Integer - number of megaraid controllers found
-  - **controllers** - Array[Controller] - list of megaraid controller informations
-    - **controller** - Integer - Controller Number
+  - **controllers** - Hash[Controller number] - structured fact of megaraid controller informations
     - **product_name** - String - Product name
     - **serial_number** - String - Serial number
     - **fw_package_build** - String - Firmware Package Build
