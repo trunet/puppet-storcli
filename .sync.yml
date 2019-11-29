@@ -1,3 +1,6 @@
 ---
 spec/spec_helper.rb:
   mock_with: ':rspec'
+.gitignore:
+  ignorepaths:
+    - /.Gemfile.lock
