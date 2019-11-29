@@ -3,7 +3,6 @@ name: Puppet Storcli CI/CD
 on: [push]
 
 env:
-  PUPPET_GEM_VERSION: '~> 6'
   PDK_PUPPET_VERSION: '6'
 
 jobs:
@@ -38,6 +37,7 @@ jobs:
         bundle -v
         bundle config path vendor/bundle
         bundle install --without system_tests --jobs 4 --retry 3
+        bundle exec pdk --version
 
     - name: Validate
       id: test-validate
@@ -51,6 +51,7 @@ jobs:
 
     - name: Check same metadata.json and git tag
       id: check-metadata-git-tag
+      if: startsWith(github.ref, 'refs/tags/v')
       run: |
         VERSION_METADATA=$(jq -r .version metadata.json)
         VERSION_GIT=$(echo $GITHUB_REF | sed 's/refs\/tags\/v//')
