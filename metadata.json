@@ -5,6 +5,8 @@
   "summary": "Puppet module to generate facts with types and providers to manage LSI MegaRAID controllers",
   "license": "Apache-2.0",
   "source": "https://github.com/trunet/puppet-storcli",
+  "project_page": "https://github.com/trunet/puppet-storcli",
+  "issues_url": "https://github.com/trunet/puppet-storcli/issues",
   "dependencies": [
 
   ],

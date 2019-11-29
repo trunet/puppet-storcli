@@ -118,11 +118,10 @@ class Megaraid
 
   # Parse and returns controllers information
   def controllers_info
-    ctrls = []
+    ctrls = {}
     @controller_info.each do |controller, parameters|
-      ctrls << {
+      ctrls[controller] = {
         # Basics
-        'controller'    => controller,
         'product_name'  => parameters.fetch('Product Name'),
         'serial_number' => parameters.fetch('Serial Number'),
 
