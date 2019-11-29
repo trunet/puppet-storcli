@@ -33,12 +33,12 @@ jobs:
     - name: Validate
       id: test-validate
       run: |
-        pdk validate
+        bundle exec pdk validate
 
     - name: Unit tests
       id: test-unit
       run: |
-        pdk test unit
+        bundle exec pdk test unit
 
     - name: Check same metadata.json and git tag
       id: check-metadata-git-tag
@@ -52,7 +52,7 @@ jobs:
       id: build
       if: startsWith(github.ref, 'refs/tags/v')
       run: |
-        pdk build
+        bundle exec pdk build
 
     - name: Create Github Release
       id: create_release
