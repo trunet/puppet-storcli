@@ -11,6 +11,12 @@ class storcli::install {
       ensure => $storcli::package_ensure,
     }
 
+    # Create a symbolic link to /usr/local/sbin
+    file { '/usr/local/sbin/storcli64':
+      ensure => 'link',
+      target => '/opt/MegaRAID/storcli/storcli64',
+    }
+
   }
 
 }

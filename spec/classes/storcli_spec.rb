@@ -35,6 +35,14 @@ describe 'storcli' do
 
           it { is_expected.not_to contain_package('storcli') }
         end
+
+        describe 'is storcli64 symlinked to /usr/local/sbin/storcli64' do
+          it {
+            is_expected.to contain_file('/usr/local/sbin/storcli64') \
+              .with_ensure('link') \
+              .with_target('/opt/MegaRAID/storcli/storcli64')
+          }
+        end
       end
     end
   end

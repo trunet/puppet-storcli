@@ -1,6 +1,6 @@
 {
   "name": "trunet-storcli",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "author": "Wagner Sartori Junior",
   "summary": "Puppet module to generate facts with types and providers to manage LSI MegaRAID controllers",
   "license": "Apache-2.0",
@@ -42,7 +42,7 @@
       "version_requirement": ">= 4.10.0 < 7.0.0"
     }
   ],
-  "pdk-version": "1.14.1",
-  "template-url": "https://github.com/puppetlabs/pdk-templates#1.14.0",
-  "template-ref": "tags/1.14.0-0-g1bf3a4e"
+  "pdk-version": "1.15.0",
+  "template-url": "https://github.com/puppetlabs/pdk-templates#1.15.0",
+  "template-ref": "tags/1.15.0-0-g0bc522e"
 }

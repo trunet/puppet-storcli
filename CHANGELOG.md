@@ -2,9 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.2.0
+
+**Features**
+
+* Add storcli to PATH
+* Updated pdk to 1.15.0
+
+**Bugfixes**
+
+* Bump excon from 0.69.1 to 0.71.0 (#1)
+
 ## Release 0.1.1
 
-** Features**
+**Features**
 
 * Convert megaraid.controllers to a HASH
 
