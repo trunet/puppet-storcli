@@ -1,6 +1,6 @@
 {
   "name": "trunet-storcli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Wagner Sartori Junior",
   "summary": "Puppet module to generate facts with types and providers to manage LSI MegaRAID controllers",
   "license": "Apache-2.0",
