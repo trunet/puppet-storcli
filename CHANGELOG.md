@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.2.1
+
+**Features**
+
+* Updated pdk to 1.18
+
+**Security**
+
+* CVE-2020-10663
+
 ## Release 0.2.0
 
 **Features**
