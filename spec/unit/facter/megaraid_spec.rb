@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pp'
 
 RSpec.configure do |c|
   c.include PuppetlabsSpec::Files
@@ -6,7 +7,7 @@ RSpec.configure do |c|
   c.before :each do
     # Ensure that we don't accidentally cache facts and environment
     # between test cases.
-    allow(Facter::Util::Loader).to receive(:any_instance).and_return(:load_all)
+    allow(LegacyFacter::Util::Loader).to receive(:any_instance).and_return(:load_all)
 
     Facter.clear
     Facter.clear_messages
@@ -79,16 +80,16 @@ describe 'megaraid fact' do
       expect(Facter.fact(:megaraid).value.fetch('controllers').count).to eq(2)
     end
     it 'key product_name' do
-      expect(Facter.fact(:megaraid).value.fetch('controllers')[0]['product_name']).to eq('AVAGO 3108 MegaRAID')
-      expect(Facter.fact(:megaraid).value.fetch('controllers')[1]['product_name']).to eq('AVAGO 3108 MegaRAID')
+      expect(Facter.fact(:megaraid).value.fetch('controllers')['0']['product_name']).to eq('AVAGO 3108 MegaRAID')
+      expect(Facter.fact(:megaraid).value.fetch('controllers')['1']['product_name']).to eq('AVAGO 3108 MegaRAID')
     end
     it 'key patrol_read/PR Next Start time' do
-      expect(Facter.fact(:megaraid).value.fetch('controllers')[0]['patrol_read']['PR Next Start time']).to eq('Saturday at 03:00:00')
-      expect(Facter.fact(:megaraid).value.fetch('controllers')[1]['patrol_read']['PR Next Start time']).to eq('Saturday at 03:00:00')
+      expect(Facter.fact(:megaraid).value.fetch('controllers')['0']['patrol_read']['PR Next Start time']).to eq('Saturday at 03:00:00')
+      expect(Facter.fact(:megaraid).value.fetch('controllers')['1']['patrol_read']['PR Next Start time']).to eq('Saturday at 03:00:00')
     end
     it 'key consistency_check/CC Next Starttime' do
-      expect(Facter.fact(:megaraid).value.fetch('controllers')[0]['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
-      expect(Facter.fact(:megaraid).value.fetch('controllers')[1]['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
+      expect(Facter.fact(:megaraid).value.fetch('controllers')['0']['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
+      expect(Facter.fact(:megaraid).value.fetch('controllers')['1']['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
     end
   end
 end
