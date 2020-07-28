@@ -29,6 +29,10 @@ jobs:
     - name: Install dependencies
       id: install-dependencies
       run: |
+        wget https://apt.puppet.com/puppet-tools-release-bionic.deb
+        sudo dpkg -i puppet-tools-release-bionic.deb
+        sudo apt-get update -y
+        sudo apt-get install -y pdk
         gem install bundler
         bundle -v
         rm Gemfile.lock || true
