@@ -8,7 +8,10 @@
   "project_page": "https://github.com/trunet/puppet-storcli",
   "issues_url": "https://github.com/trunet/puppet-storcli/issues",
   "dependencies": [
-
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 5.0.0 < 9.0.0"
+    }
   ],
   "operatingsystem_support": [
     {

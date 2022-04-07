@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.2.2
+
+**Features**
+
+* Updated pdk to 2.4.0
+* Package is only installed by default on hosts with card detected
+* Binary linked into "/usr/local/sbin" is determined from facts
+
 ## Release 0.2.1
 
 **Features**
