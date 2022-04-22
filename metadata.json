@@ -38,15 +38,39 @@
       "operatingsystemrelease": [
         "7"
       ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "10"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "18.04"
+      ]
+    },
+    {
+      "operatingsystem": "Fedora",
+      "operatingsystemrelease": [
+        "29"
+      ]
+    },
+    {
+      "operatingsystem": "SLES",
+      "operatingsystemrelease": [
+        "15"
+      ]
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.10.0 < 8.0.0"
+      "version_requirement": ">= 6.21.0 < 8.0.0"
     }
   ],
   "pdk-version": "2.4.0",
-  "template-url": "https://github.com/puppetlabs/pdk-templates#2.4.0",
+  "template-url": "pdk-default#2.4.0",
   "template-ref": "tags/2.4.0-0-gfa6b6d2"
 }

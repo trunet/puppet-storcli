@@ -34,6 +34,8 @@ jobs:
         sudo apt-get update -y
         sudo apt-get install -y pdk puppet-agent
         source /etc/profile
+        mkdir -p ~/.facter/facts.d
+        mkdir -p ~/.puppetlabs/opt/facter/facts.d
         pdk bundle config path vendor/bundle
         pdk bundle config set without 'system_tests'
         pdk bundle install --jobs 4 --retry 3
