@@ -1,95 +1,89 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
-require 'pp'
+require 'facter'
+require 'facter/megaraid'
 
-RSpec.configure do |c|
-  c.include PuppetlabsSpec::Files
+describe :megaraid, type: :fact do
+  subject(:fact) { Facter.fact(:megaraid) }
 
-  c.before :each do
-    # Ensure that we don't accidentally cache facts and environment
-    # between test cases.
-    allow(LegacyFacter::Util::Loader).to receive(:any_instance).and_return(:load_all)
-
+  before :each do
+    # perform any action that should be run before every test
     Facter.clear
-    Facter.clear_messages
-
-    # Store any environment variables away to be restored later
-    @old_env = {}
-    ENV.each_key { |k| @old_env[k] = ENV[k] }
   end
 
-  c.after :each do
-    PuppetlabsSpec::Files.cleanup
-  end
-end
-
-describe 'megaraid fact' do
-  describe 'megaraid_sas driver and storcli unavailable' do
-    it 'key present?' do
-      expect(Facter.fact(:megaraid).value.fetch('present?')).to eq(false)
-    end
-    it 'key storcli' do
-      expect(Facter.fact(:megaraid).value.fetch('storcli')).to eq(nil)
-    end
-    it 'key number_of_controllers' do
-      expect(Facter.fact(:megaraid).value.fetch('number_of_controllers')).to eq(0)
-    end
-    it 'key controllers' do
-      expect(Facter.fact(:megaraid).value.fetch('controllers')).to eq({})
-    end
-  end
-
-  describe 'megaraid_sas unavailable and storcli available' do
+  context 'no module present' do
     before :each do
-      allow(Facter::Util::Resolution).to receive(:which).and_call_original
-      allow(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli64').and_return('/opt/MegaRAID/storcli/storcli64')
+      allow(Dir).to receive(:exist?).and_return(false)
+      expect(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/megaraid_sas').and_return(false)
+
+      expect(Facter::Util::Resolution).not_to receive(:which)
+      expect(Facter::Util::Resolution).not_to receive(:exec)
     end
-    it 'key present?' do
-      expect(Facter.fact(:megaraid).value.fetch('present?')).to eq(false)
-    end
-    it 'key storcli' do
-      expect(Facter.fact(:megaraid).value.fetch('storcli')).to eq(nil)
-    end
-    it 'key number_of_controllers' do
-      expect(Facter.fact(:megaraid).value.fetch('number_of_controllers')).to eq(0)
-    end
-    it 'key controllers' do
-      expect(Facter.fact(:megaraid).value.fetch('controllers')).to eq({})
+
+    it do
+      expect(fact.value['present?']).to eq(false)
+      expect(fact.value['storcli']).to eq(nil)
+      expect(fact.value['number_of_controllers']).to eq(0)
+      expect(fact.value['controllers']).to eq({})
     end
   end
 
-  describe 'megaraid_sas and storcli available' do
+  context 'module present, no storcli' do
     before :each do
-      allow(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/megaraid_sas').and_return(true)
-      allow(Facter::Util::Resolution).to receive(:which).and_call_original
-      allow(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli64').and_return('/opt/MegaRAID/storcli/storcli64')
-      allow(Facter::Util::Resolution).to receive(:exec).with('/opt/MegaRAID/storcli/storcli64 /call show J').and_return(File.read('spec/fixtures/storcli_call_show.json'))
-      allow(Facter::Util::Resolution).to receive(:exec).with('/opt/MegaRAID/storcli/storcli64 /call show patrolread J').and_return(File.read('spec/fixtures/storcli_call_show_patrolread.json'))
-      allow(Facter::Util::Resolution).to receive(:exec).with('/opt/MegaRAID/storcli/storcli64 /call show cc J').and_return(File.read('spec/fixtures/storcli_call_show_cc.json'))
+      allow(Dir).to receive(:exist?).and_return(true)
+      expect(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/megaraid_sas').and_return(true)
+
+      expect(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return(nil).twice
+      expect(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli64').and_return(nil).twice
+      expect(Facter::Util::Resolution).to receive(:which).with('storcli').and_return(nil).twice
+      expect(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli').and_return(nil).twice
+
+      expect(Facter::Util::Resolution).not_to receive(:exec)
     end
 
-    it 'key present?' do
-      expect(Facter.fact(:megaraid).value.fetch('present?')).to eq(true)
+    it do
+      expect(fact.value['present?']).to eq(true)
+      expect(fact.value['storcli']).to eq(nil)
+      expect(fact.value['number_of_controllers']).to eq(0)
+      expect(fact.value['controllers']).to eq({})
     end
-    it 'key storcli' do
-      expect(Facter.fact(:megaraid).value.fetch('storcli')).to eq('/opt/MegaRAID/storcli/storcli64')
+  end
+
+  context 'module present, storcli present' do
+    before :each do
+      allow(Dir).to receive(:exist?).and_return(true)
+      expect(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/megaraid_sas').and_return(true)
+
+      expect(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return('/example/path').twice
+      expect(Facter::Util::Resolution).not_to receive(:which).with('/opt/MegaRAID/storcli/storcli64')
+      expect(Facter::Util::Resolution).not_to receive(:which).with('storcli')
+      expect(Facter::Util::Resolution).not_to receive(:which).with('/opt/MegaRAID/storcli/storcli')
+
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show J').and_return(File.read('spec/fixtures/storcli_call_show.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show patrolread J').and_return(File.read('spec/fixtures/storcli_call_show_patrolread.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show cc J').and_return(File.read('spec/fixtures/storcli_call_show_cc.json'))
     end
-    it 'key number_of_controllers' do
-      expect(Facter.fact(:megaraid).value.fetch('number_of_controllers')).to eq(2)
+
+    it do
+      expect(fact.value['present?']).to eq(true)
+      expect(fact.value['storcli']).to eq('/example/path')
+      expect(fact.value['number_of_controllers']).to eq(2)
     end
-    it 'key controllers' do
-      expect(Facter.fact(:megaraid).value.fetch('controllers').count).to eq(2)
-    end
-    it 'key product_name' do
-      expect(Facter.fact(:megaraid).value.fetch('controllers')['0']['product_name']).to eq('AVAGO 3108 MegaRAID')
-      expect(Facter.fact(:megaraid).value.fetch('controllers')['1']['product_name']).to eq('AVAGO 3108 MegaRAID')
-    end
-    it 'key patrol_read/PR Next Start time' do
-      expect(Facter.fact(:megaraid).value.fetch('controllers')['0']['patrol_read']['PR Next Start time']).to eq('Saturday at 03:00:00')
-      expect(Facter.fact(:megaraid).value.fetch('controllers')['1']['patrol_read']['PR Next Start time']).to eq('Saturday at 03:00:00')
-    end
-    it 'key consistency_check/CC Next Starttime' do
-      expect(Facter.fact(:megaraid).value.fetch('controllers')['0']['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
-      expect(Facter.fact(:megaraid).value.fetch('controllers')['1']['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
+    it 'controllers structure' do
+      expect(fact.value['controllers'].count).to eq(2)
+
+      # key product_name
+      expect(fact.value.fetch('controllers')['0']['product_name']).to eq('AVAGO 3108 MegaRAID')
+      expect(fact.value.fetch('controllers')['1']['product_name']).to eq('AVAGO 3108 MegaRAID')
+
+      # key patrol_read/PR Next Start time
+      expect(fact.value.fetch('controllers')['0']['patrol_read']['PR Next Start time']).to eq('Saturday at 03:00:00')
+      expect(fact.value.fetch('controllers')['1']['patrol_read']['PR Next Start time']).to eq('Saturday at 03:00:00')
+
+      # key consistency_check/CC Next Starttime
+      expect(fact.value.fetch('controllers')['0']['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
+      expect(fact.value.fetch('controllers')['1']['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
     end
   end
 end
