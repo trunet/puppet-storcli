@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # megaraid.rb
 #
@@ -153,6 +155,8 @@ class Megaraid
 end
 
 Facter.add(:megaraid) do
+  confine kernel: 'Linux'
+
   setcode do
     megaraid = Megaraid.new
     megaraid.all_facts
