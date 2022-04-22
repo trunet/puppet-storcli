@@ -38,7 +38,7 @@
 #   Should controller clock use UTC?
 #   Default value: true
 #
-# @param perfmode
+# @param controller_perfmode
 #   Prioritize IOPS(0) or low latency(1)
 #   Set as an integer should new modes be added
 #   Default value: 0
