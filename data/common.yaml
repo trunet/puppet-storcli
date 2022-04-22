@@ -1,5 +1,31 @@
 ---
 storcli::package_manage: "%{facts.megaraid.present?}"
-storcli::package_name: [ 'storcli' ]
+storcli::package_name:
+  - 'storcli'
 storcli::package_ensure: present
 storcli::link_storcli_to: /usr/local/sbin
+
+storcli::configure_settings: true
+
+storcli::controller_autorebuild: true
+storcli::controller_rebuildrate: 60
+
+storcli::sync_time_to_controllers: true
+storcli::controller_use_utc: true
+
+storcli::controller_perfmode: 0
+storcli::controller_ncq: true
+storcli::controller_cacheflushinterval: 4
+storcli::controller_bootwithpinnedcache: false
+
+storcli::controller_alarm: true
+storcli::controller_bbu_learndelayinterval: 0
+storcli::controller_smartpollinterval: 60
+storcli::controller_patrolread_mode: auto
+storcli::controller_patrolread_delay: 336
+storcli::controller_patrolread_rate: 30
+storcli::controller_patrolread_includessds: false
+storcli::controller_patrolread_uncfgareas: false
+storcli::controller_consistencycheck_mode: conc
+storcli::controller_consistencycheck_delay: 672
+storcli::controller_consistencycheck_rate: 30

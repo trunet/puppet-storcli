@@ -4,11 +4,12 @@ describe 'storcli' do
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       context 'with card detected' do
-        let(:facts) { os_facts.merge({ 'megaraid' => { 'present?' => true, 'storcli' => '/usr/local/sbin/storcli64' } }) }
+        let(:facts) { os_facts.merge({ 'megaraid' => { 'present?' => true, 'storcli' => '/usr/local/sbin/storcli64', 'controllers' => {} } }) }
 
         it { is_expected.to compile }
 
         it { is_expected.to contain_class('storcli::install') }
+        it { is_expected.to contain_class('storcli::configure') }
 
         describe 'storcli::install' do
           let(:params) { { package_ensure: 'present', package_name: ['storcli'] } }
@@ -44,7 +45,7 @@ describe 'storcli' do
       end
 
       context 'with card detected, non-default link target' do
-        let(:facts) { os_facts.merge({ 'megaraid' => { 'present?' => true, 'storcli' => '/non/default/storcli' } }) }
+        let(:facts) { os_facts.merge({ 'megaraid' => { 'present?' => true, 'storcli' => '/non/default/storcli', 'controllers' => {} } }) }
 
         it { is_expected.to compile }
 
@@ -64,7 +65,7 @@ describe 'storcli' do
       end
 
       context 'with card not detected' do
-        let(:facts) { os_facts.merge({ 'megaraid' => { 'present?' => false } }) }
+        let(:facts) { os_facts.merge({ 'megaraid' => { 'present?' => false, 'controllers' => {} } }) }
 
         it { is_expected.to compile }
 
