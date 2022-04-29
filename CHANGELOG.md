@@ -2,9 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.3.1
+
+**Bugfixes**
+
+* storcli on an EFI host doesn't support JSON mode (for some reason)
+
 ## Release 0.3.0
 
 **Features**
+
 * Add ability to set configuration on card
 
 ## Release 0.2.2
