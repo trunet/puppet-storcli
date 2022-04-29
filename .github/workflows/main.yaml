@@ -3,7 +3,7 @@ name: Puppet Storcli CI/CD
 on: [push]
 
 env:
-  PDK_PUPPET_VERSION: '6'
+  PDK_PUPPET_VERSION: '7'
 
 jobs:
   build:
