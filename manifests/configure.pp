@@ -111,13 +111,13 @@ class storcli::configure (
         if $controller_autorebuild {
           exec { "Enable autorebuild on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set autorebuild=on",
-            unless   => "${storcli} ${c} show autorebuild J | grep '\"Value\" : \"ON\"'",
+            unless   => "${storcli} ${c} show autorebuild | grep AutoRebuild |grep ON",
             provider => 'shell',
           }
         } else {
           exec { "Disable autorebuild on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set autorebuild=off",
-            unless   => "${storcli} ${c} show autorebuild J | grep '\"Value\" : \"OFF\"'",
+            unless   => "${storcli} ${c} show autorebuild | grep AutoRebuild |grep OFF",
             provider => 'shell',
           }
         }
@@ -132,13 +132,13 @@ class storcli::configure (
           if $controller_use_utc {
             exec { "Set time on MegaRAID controller ${c} to UTC":
               command  => "${storcli} ${c} set time=$(date -u +%Y%m%d %H:%M:%S)",
-              unless   => "${storcli} ${c} show time J | grep Value | grep $(date -u '+%Y/%m/%d') | grep $(date -u '+%H:')",
+              unless   => "${storcli} ${c} show time | grep Time | grep $(date -u '+%Y/%m/%d') | grep $(date -u '+%H:')",
               provider => 'shell',
             }
           } else {
             exec { "Set time on MegaRAID controller ${c} to local time":
               command  => "${storcli} ${c} set time=systemtime",
-              unless   => "${storcli} ${c} show time J | grep Value | grep $(date '+%Y/%m/%d') | grep $(date '+%H:')",
+              unless   => "${storcli} ${c} show time | grep Time | grep $(date '+%Y/%m/%d') | grep $(date '+%H:')",
               provider => 'shell',
             }
           }
@@ -146,40 +146,40 @@ class storcli::configure (
 
         exec { "Set perfmode=${controller_perfmode} on MegaRAID controller ${c}":
           command  => "${storcli} ${c} set perfmode=${controller_perfmode}",
-          unless   => "${storcli} ${c} show perfmode J | grep '\"Value\" : \"${controller_perfmode}'",
+          unless   => "${storcli} ${c} show perfmode | grep 'Perf Mode' | cut -d ' ' -f 3 | grep ${controller_perfmode}",
           provider => 'shell',
         }
 
         if $controller_ncq {
           exec { "Enable NCQ on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set ncq=on",
-            unless   => "${storcli} ${c} show ncq J | grep '\"Value\" : \"ON\"'",
+            unless   => "${storcli} ${c} show ncq | grep NCQ | grep ON",
             provider => 'shell',
           }
         } else {
           exec { "Disable NCQ on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set ncq=off",
-            unless   => "${storcli} ${c} show ncq J | grep '\"Value\" : \"OFF\"'",
+            unless   => "${storcli} ${c} show ncq | grep NCQ | grep OFF",
             provider => 'shell',
           }
         }
 
         exec { "Set cacheflushinterval=${controller_cacheflushinterval} on MegaRAID controller ${c}":
           command  => "${storcli} ${c} set cacheflushint=${controller_cacheflushinterval}",
-          unless   => "${storcli} ${c} show cacheflushint J | grep '\"Value\" : \"${controller_cacheflushinterval}'",
+          unless   => "${storcli} ${c} show cacheflushint | grep 'Cache Flush Interval' |grep '${controller_cacheflushinterval} sec'",
           provider => 'shell',
         }
 
         if $controller_bootwithpinnedcache {
           exec { "Enable bootwithpinnedcache on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set bootwithpinnedcache=on",
-            unless   => "${storcli} ${c} show bootwithpinnedcache J | grep '\"Value\" : \"ON\"'",
+            unless   => "${storcli} ${c} show bootwithpinnedcache | grep 'Boot With Pinned Cache' |grep ON",
             provider => 'shell',
           }
         } else {
           exec { "Disable bootwithpinnedcache on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set bootwithpinnedcache=off",
-            unless   => "${storcli} ${c} show bootwithpinnedcache J | grep '\"Value\" : \"OFF\"'",
+            unless   => "${storcli} ${c} show bootwithpinnedcache | grep 'Boot With Pinned Cache' |grep OFF",
             provider => 'shell',
           }
         }
@@ -187,20 +187,20 @@ class storcli::configure (
         if $controller_alarm {
           exec { "Enable alarm sound on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set alarm=on",
-            unless   => "${storcli} ${c} show alarm J | grep '\"Value\" : \"ON\"'",
+            unless   => "${storcli} ${c} show alarm | grep Alarm | grep ON",
             provider => 'shell',
           }
         } else {
           exec { "Disable alarm sound on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set alarm=off",
-            unless   => "${storcli} ${c} show alarm J | grep '\"Value\" : \"OFF\"'",
+            unless   => "${storcli} ${c} show alarm | grep Alarm | grep OFF",
             provider => 'shell',
           }
         }
 
         exec { "Set smartpollinterval=${controller_smartpollinterval} on MegaRAID controller ${c}":
           command  => "${storcli} ${c} set smartpollinterval=${controller_smartpollinterval}",
-          unless   => "${storcli} ${c} show smartpollinterval J | grep '\"Value\" : \"${controller_smartpollinterval}'",
+          unless   => "${storcli} ${c} show smartpollinterval | grep 'SmartPollInterval' | grep '${controller_smartpollinterval} sec'",
           provider => 'shell',
         }
 
@@ -225,7 +225,7 @@ class storcli::configure (
           }
           exec { "Set patrolread rate=${controller_patrolread_rate}% on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set prrate=${controller_patrolread_rate}",
-            unless   => "${storcli} ${c} show prrate J | grep '\"Value\" : \"${controller_patrolread_rate}'",
+            unless   => "${storcli} ${c} show prrate | grep 'Patrol Read Rate' | grep '${controller_patrolread_rate}%'",
             provider => 'shell',
           }
           if $controller_patrolread_includessds {
@@ -275,7 +275,7 @@ class storcli::configure (
           }
           exec { "Set consistency check rate=${controller_consistencycheck_rate}% on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set ccrate=${controller_consistencycheck_rate}",
-            unless   => "${storcli} ${c} show ccrate J | grep '\"Value\" : \"${controller_consistencycheck_rate}'",
+            unless   => "${storcli} ${c} show ccrate | grep 'CC Rate' | grep '${controller_consistencycheck_rate}%'",
             provider => 'shell',
           }
         }
