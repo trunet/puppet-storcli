@@ -33,7 +33,13 @@ class Megaraid
   def storcli
     @storcli = nil
     return unless present?
-    storcli_locations = ['storcli64', '/opt/MegaRAID/storcli/storcli64', 'storcli', '/opt/MegaRAID/storcli/storcli']
+    manufacturer = Facter.value(:dmi)['manufacturer']
+    storcli_locations = if manufacturer.include? 'Dell'
+                          ['perccli64', '/opt/MegaRAID/perccli/perccli64', 'perccli', '/opt/MegaRAID/perccli/perccli']
+                        else
+                          ['storcli64', '/opt/MegaRAID/storcli/storcli64', 'storcli', '/opt/MegaRAID/storcli/storcli']
+                        end
+
     storcli_locations.each do |run|
       @storcli = Facter::Util::Resolution.which(run)
       next if @storcli.nil?
