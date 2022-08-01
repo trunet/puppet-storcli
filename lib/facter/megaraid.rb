@@ -34,7 +34,7 @@ class Megaraid
     @storcli = nil
     return unless present?
     manufacturer = Facter.value(:dmi)['manufacturer']
-    storcli_locations = if manufacturer.include? %r{Dell}
+    storcli_locations = if manufacturer.include? 'Dell'
                           ['perccli64', '/opt/MegaRAID/perccli/perccli64', 'perccli', '/opt/MegaRAID/perccli/perccli']
                         else
                           ['storcli64', '/opt/MegaRAID/storcli/storcli64', 'storcli', '/opt/MegaRAID/storcli/storcli']
