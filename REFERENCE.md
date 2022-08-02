@@ -32,6 +32,7 @@ The following parameters are available in the `storcli` class:
 * [`package_ensure`](#package_ensure)
 * [`link_storcli_to`](#link_storcli_to)
 * [`configure_settings`](#configure_settings)
+* [`controller_manage_rebuild`](#controller_manage_rebuild)
 * [`controller_autorebuild`](#controller_autorebuild)
 * [`controller_rebuildrate`](#controller_rebuildrate)
 * [`sync_time_to_controllers`](#sync_time_to_controllers)
@@ -40,6 +41,7 @@ The following parameters are available in the `storcli` class:
 * [`controller_ncq`](#controller_ncq)
 * [`controller_cacheflushinterval`](#controller_cacheflushinterval)
 * [`controller_bootwithpinnedcache`](#controller_bootwithpinnedcache)
+* [`controller_manage_alarm`](#controller_manage_alarm)
 * [`controller_alarm`](#controller_alarm)
 * [`controller_smartpollinterval`](#controller_smartpollinterval)
 * [`controller_patrolread_mode`](#controller_patrolread_mode)
@@ -84,6 +86,13 @@ Data type: `Boolean`
 
 Should this class be able to enforce configuration settings on the controllers?
 If you've got multiple controllers which should have different configs, you'll want to set this to false.
+Default value: true
+
+##### <a name="controller_manage_rebuild"></a>`controller_manage_rebuild`
+
+Data type: `Boolean`
+
+Should this class manage how the controller automatically rebuilds arrays
 Default value: true
 
 ##### <a name="controller_autorebuild"></a>`controller_autorebuild`
@@ -142,6 +151,14 @@ Data type: `Boolean`
 
 Continue booting with data stuck in cache?
 Default value: false
+
+##### <a name="controller_manage_alarm"></a>`controller_manage_alarm`
+
+Data type: `Boolean`
+
+Should this class manage the alarm on the controller
+Set to false if storcli cannot manage the alarm on a particular controller
+Default value: true
 
 ##### <a name="controller_alarm"></a>`controller_alarm`
 
@@ -223,6 +240,7 @@ Configure the storage controllers with the specified settings
 The following parameters are available in the `storcli::configure` class:
 
 * [`configure_settings`](#configure_settings)
+* [`controller_manage_rebuild`](#controller_manage_rebuild)
 * [`controller_autorebuild`](#controller_autorebuild)
 * [`controller_rebuildrate`](#controller_rebuildrate)
 * [`sync_time_to_controllers`](#sync_time_to_controllers)
@@ -231,6 +249,7 @@ The following parameters are available in the `storcli::configure` class:
 * [`controller_ncq`](#controller_ncq)
 * [`controller_cacheflushinterval`](#controller_cacheflushinterval)
 * [`controller_bootwithpinnedcache`](#controller_bootwithpinnedcache)
+* [`controller_manage_alarm`](#controller_manage_alarm)
 * [`controller_alarm`](#controller_alarm)
 * [`controller_smartpollinterval`](#controller_smartpollinterval)
 * [`controller_patrolread_mode`](#controller_patrolread_mode)
@@ -251,6 +270,15 @@ If you've got multiple controllers which should have different configs, you'll w
 Default value: true
 
 Default value: `$storcli::configure_settings`
+
+##### <a name="controller_manage_rebuild"></a>`controller_manage_rebuild`
+
+Data type: `Any`
+
+Should this class manage how the controller automatically rebuilds arrays
+Default value: true
+
+Default value: `$storcli::controller_manage_rebuild`
 
 ##### <a name="controller_autorebuild"></a>`controller_autorebuild`
 
@@ -324,6 +352,16 @@ Continue booting with data stuck in cache?
 Default value: false
 
 Default value: `$storcli::controller_bootwithpinnedcache`
+
+##### <a name="controller_manage_alarm"></a>`controller_manage_alarm`
+
+Data type: `Any`
+
+Should this class manage the alarm on the controller
+Set to false if storcli cannot manage the alarm on a particular controller
+Default value: true
+
+Default value: `$storcli::controller_manage_alarm`
 
 ##### <a name="controller_alarm"></a>`controller_alarm`
 

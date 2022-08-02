@@ -7,6 +7,10 @@
 #   If you've got multiple controllers which should have different configs, you'll want to set this to false.
 #   Default value: true
 #
+# @param controller_manage_rebuild
+#   Should this class manage how the controller automatically rebuilds arrays
+#   Default value: true
+#
 # @param controller_autorebuild
 #   Should this controller automatically rebuild arrays
 #   Default value: true
@@ -39,6 +43,11 @@
 # @param controller_bootwithpinnedcache
 #   Continue booting with data stuck in cache?
 #   Default value: false
+#
+# @param controller_manage_alarm
+#   Should this class manage the alarm on the controller
+#   Set to false if storcli cannot manage the alarm on a particular controller
+#   Default value: true
 #
 # @param controller_alarm
 #   Sound alarm when a disk is bad?
@@ -83,6 +92,7 @@
 #
 class storcli::configure (
   $configure_settings = $storcli::configure_settings,
+  $controller_manage_rebuild = $storcli::controller_manage_rebuild,
   $controller_autorebuild = $storcli::controller_autorebuild,
   $controller_rebuildrate = $storcli::controller_rebuildrate,
   $sync_time_to_controllers = $storcli::sync_time_to_controllers,
@@ -91,6 +101,7 @@ class storcli::configure (
   $controller_ncq = $storcli::controller_ncq,
   $controller_cacheflushinterval = $storcli::controller_cacheflushinterval,
   $controller_bootwithpinnedcache = $storcli::controller_bootwithpinnedcache,
+  $controller_manage_alarm = $storcli::controller_manage_alarm,
   $controller_alarm = $storcli::controller_alarm,
   $controller_smartpollinterval = $storcli::controller_smartpollinterval,
   $controller_patrolread_mode = $storcli::controller_patrolread_mode,
@@ -108,24 +119,26 @@ class storcli::configure (
         $c = "/c${x}"
         $storcli = $facts['megaraid']['storcli']
 
-        if $controller_autorebuild {
-          exec { "Enable autorebuild on MegaRAID controller ${c}":
-            command  => "${storcli} ${c} set autorebuild=on",
-            unless   => "${storcli} ${c} show autorebuild | grep AutoRebuild |grep ON",
-            provider => 'shell',
+        if $controller_manage_rebuild {
+          if $controller_autorebuild {
+            exec { "Enable autorebuild on MegaRAID controller ${c}":
+              command  => "${storcli} ${c} set autorebuild=on",
+              unless   => "${storcli} ${c} show autorebuild | grep AutoRebuild |grep ON",
+              provider => 'shell',
+            }
+          } else {
+            exec { "Disable autorebuild on MegaRAID controller ${c}":
+              command  => "${storcli} ${c} set autorebuild=off",
+              unless   => "${storcli} ${c} show autorebuild | grep AutoRebuild |grep OFF",
+              provider => 'shell',
+            }
           }
-        } else {
-          exec { "Disable autorebuild on MegaRAID controller ${c}":
-            command  => "${storcli} ${c} set autorebuild=off",
-            unless   => "${storcli} ${c} show autorebuild | grep AutoRebuild |grep OFF",
-            provider => 'shell',
-          }
-        }
 
-        exec { "Set rebuildrate=${controller_rebuildrate}% on MegaRAID controller ${c}":
-          command  => "${storcli} ${c} set rebuildrate=${controller_rebuildrate}",
-          unless   => "${storcli} ${c} show autorebuild | grep '\"Value\" : \"${controller_rebuildrate}%\"'",
-          provider => 'shell',
+          exec { "Set rebuildrate=${controller_rebuildrate}% on MegaRAID controller ${c}":
+            command  => "${storcli} ${c} set rebuildrate=${controller_rebuildrate}",
+            unless   => "${storcli} ${c} show autorebuild | grep '\"Value\" : \"${controller_rebuildrate}%\"'",
+            provider => 'shell',
+          }
         }
 
         if $sync_time_to_controllers {
@@ -184,17 +197,19 @@ class storcli::configure (
           }
         }
 
-        if $controller_alarm {
-          exec { "Enable alarm sound on MegaRAID controller ${c}":
-            command  => "${storcli} ${c} set alarm=on",
-            unless   => "${storcli} ${c} show alarm | grep Alarm | grep ON",
-            provider => 'shell',
-          }
-        } else {
-          exec { "Disable alarm sound on MegaRAID controller ${c}":
-            command  => "${storcli} ${c} set alarm=off",
-            unless   => "${storcli} ${c} show alarm | grep Alarm | grep OFF",
-            provider => 'shell',
+        if $controller_manage_alarm {
+          if $controller_alarm {
+            exec { "Enable alarm sound on MegaRAID controller ${c}":
+              command  => "${storcli} ${c} set alarm=on",
+              unless   => "${storcli} ${c} show alarm | grep Alarm | grep ON",
+              provider => 'shell',
+            }
+          } else {
+            exec { "Disable alarm sound on MegaRAID controller ${c}":
+              command  => "${storcli} ${c} set alarm=off",
+              unless   => "${storcli} ${c} show alarm | grep Alarm | grep OFF",
+              provider => 'shell',
+            }
           }
         }
 
