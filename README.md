@@ -27,6 +27,8 @@ This puppet module generate facts and provides types and providers to manage LSI
 
 This module makes use of storcli. The package needs to be available from some repository to be installed.
 
+If running on a Dell server, the module will look to use perccli if it exists. The perccli package will need to be installed separately from this module.
+
 ## Usage
 
 ```

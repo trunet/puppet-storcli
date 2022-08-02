@@ -54,6 +54,7 @@ describe 'storcli::configure' do
         let(:params) do
           {
             'configure_settings' => true,
+            'controller_manage_rebuild' => true,
             'controller_autorebuild' => true,
           }
         end
@@ -70,6 +71,7 @@ describe 'storcli::configure' do
         let(:params) do
           {
             'configure_settings' => true,
+            'controller_manage_rebuild' => true,
             'controller_autorebuild' => false,
           }
         end
@@ -86,6 +88,7 @@ describe 'storcli::configure' do
         let(:params) do
           {
             'configure_settings' => true,
+            'controller_manage_rebuild' => true,
             'controller_rebuildrate' => 50,
           }
         end
@@ -242,6 +245,7 @@ describe 'storcli::configure' do
         let(:params) do
           {
             'configure_settings' => true,
+            'controller_manage_alarm' => true,
             'controller_alarm' => true,
           }
         end
@@ -258,6 +262,7 @@ describe 'storcli::configure' do
         let(:params) do
           {
             'configure_settings' => true,
+            'controller_manage_alarm' => true,
             'controller_alarm' => false,
           }
         end

@@ -7,6 +7,7 @@ storcli::link_storcli_to: /usr/local/sbin
 
 storcli::configure_settings: true
 
+storcli::controller_manage_rebuild: true
 storcli::controller_autorebuild: true
 storcli::controller_rebuildrate: 60
 
@@ -18,6 +19,7 @@ storcli::controller_ncq: true
 storcli::controller_cacheflushinterval: 4
 storcli::controller_bootwithpinnedcache: false
 
+storcli::controller_manage_alarm: true
 storcli::controller_alarm: true
 storcli::controller_bbu_learndelayinterval: 0
 storcli::controller_smartpollinterval: 60

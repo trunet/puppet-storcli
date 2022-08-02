@@ -22,6 +22,10 @@
 #   If you've got multiple controllers which should have different configs, you'll want to set this to false.
 #   Default value: true
 #
+# @param controller_manage_rebuild
+#   Should this class manage how the controller automatically rebuilds arrays
+#   Default value: true
+#
 # @param controller_autorebuild
 #   Should this controller automatically rebuild arrays
 #   Default value: true
@@ -54,6 +58,11 @@
 # @param controller_bootwithpinnedcache
 #   Continue booting with data stuck in cache?
 #   Default value: false
+#
+# @param controller_manage_alarm
+#   Should this class manage the alarm on the controller
+#   Set to false if storcli cannot manage the alarm on a particular controller
+#   Default value: true
 #
 # @param controller_alarm
 #   Sound alarm when a disk is bad?
@@ -98,12 +107,13 @@
 #
 class storcli (
   # Hiera can convert facts to strings, but we really want a bool
-  # https://tickets.puppetlabs.com/browse/PUP-10259 
+  # https://tickets.puppetlabs.com/browse/PUP-10259
   Variant[Boolean, Enum['true', 'false']] $package_manage,
   Array[String] $package_name,
   String        $package_ensure,
   Stdlib::Absolutepath $link_storcli_to,
   Boolean         $configure_settings,
+  Boolean         $controller_manage_rebuild,
   Boolean         $controller_autorebuild,
   Integer[0, 100] $controller_rebuildrate,
   Boolean         $sync_time_to_controllers,
@@ -112,6 +122,7 @@ class storcli (
   Boolean         $controller_ncq,
   Integer[1]      $controller_cacheflushinterval,
   Boolean         $controller_bootwithpinnedcache,
+  Boolean         $controller_manage_alarm,
   Boolean         $controller_alarm,
   Integer[0, 65535]             $controller_smartpollinterval,
   Enum['auto', 'manual', 'off'] $controller_patrolread_mode,
