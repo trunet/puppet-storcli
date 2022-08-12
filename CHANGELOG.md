@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.4.0
+
+**Features**
+
+* Support for mpt3sas cards
+
+## Release 0.3.2
+
+**Features**
+
+* attempt to use perccli on Dell servers
+* Booleans for `controller_manage_rebuild` and `controller_manage_alarm`
+
 ## Release 0.3.1
 
 **Bugfixes**

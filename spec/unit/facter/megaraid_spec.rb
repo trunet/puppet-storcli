@@ -16,6 +16,7 @@ describe :megaraid, type: :fact do
     before :each do
       allow(Dir).to receive(:exist?).and_return(false)
       expect(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/megaraid_sas').and_return(false)
+      expect(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/mpt3sas').and_return(false)
 
       expect(Facter::Util::Resolution).not_to receive(:which)
       expect(Facter::Util::Resolution).not_to receive(:exec)
@@ -32,6 +33,7 @@ describe :megaraid, type: :fact do
   context 'module present, no storcli' do
     before :each do
       allow(Dir).to receive(:exist?).and_return(true)
+      allow(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/mpt3sas').and_return(true)
       expect(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/megaraid_sas').and_return(true)
 
       expect(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return(nil).twice
@@ -53,6 +55,7 @@ describe :megaraid, type: :fact do
   context 'module present, storcli present' do
     before :each do
       allow(Dir).to receive(:exist?).and_return(true)
+      allow(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/mpt3sas').and_return(true)
       expect(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/megaraid_sas').and_return(true)
 
       expect(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return('/example/path').twice
@@ -68,22 +71,27 @@ describe :megaraid, type: :fact do
     it do
       expect(fact.value['present?']).to eq(true)
       expect(fact.value['storcli']).to eq('/example/path')
-      expect(fact.value['number_of_controllers']).to eq(2)
+      expect(fact.value['number_of_controllers']).to eq(3)
     end
     it 'controllers structure' do
-      expect(fact.value['controllers'].count).to eq(2)
+      expect(fact.value['controllers'].count).to eq(3)
 
       # key product_name
       expect(fact.value.fetch('controllers')['0']['product_name']).to eq('AVAGO 3108 MegaRAID')
       expect(fact.value.fetch('controllers')['1']['product_name']).to eq('AVAGO 3108 MegaRAID')
+      expect(fact.value.fetch('controllers')['2']['product_name']).to eq('LSI3008-IR')
 
       # key patrol_read/PR Next Start time
       expect(fact.value.fetch('controllers')['0']['patrol_read']['PR Next Start time']).to eq('Saturday at 03:00:00')
       expect(fact.value.fetch('controllers')['1']['patrol_read']['PR Next Start time']).to eq('Saturday at 03:00:00')
+      expect(fact.value.fetch('controllers')['2']['patrol_read']['PR Next Start time']).to eq('Un-supported')
+      expect(fact.value.fetch('controllers')['2']['patrol_read']['PR Mode']).to eq('Un-supported')
 
       # key consistency_check/CC Next Starttime
       expect(fact.value.fetch('controllers')['0']['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
       expect(fact.value.fetch('controllers')['1']['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
+      expect(fact.value.fetch('controllers')['2']['consistency_check']['CC Next Starttime']).to eq('Un-supported')
+      expect(fact.value.fetch('controllers')['2']['consistency_check']['CC Operation Mode']).to eq('Un-supported')
     end
   end
 end

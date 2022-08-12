@@ -8,25 +8,11 @@
 require 'json'
 require 'time'
 
-# Include dig function on Hash
-class Hash
-  def dig(key, *rest)
-    value = self[key]
-    if value.nil? || rest.empty?
-      value
-    elsif value.respond_to?(:dig)
-      value.dig(*rest)
-    else
-      raise TypeError, "#{value.class} does not have #dig method"
-    end
-  end
-end
-
 # Main Megaraid class
 class Megaraid
-  # Is megaraid present?
+  # Is a megaraid driver present?
   def present?
-    Dir.exist?('/sys/bus/pci/drivers/megaraid_sas')
+    Dir.exist?('/sys/bus/pci/drivers/megaraid_sas') || Dir.exist?('/sys/bus/pci/drivers/mpt3sas')
   end
 
   # where's storcli application
@@ -50,9 +36,11 @@ class Megaraid
 
   # Function to call all get methods
   def all_info
-    controller_info
-    pr_info
-    cc_info
+    Dir.chdir("/tmp") do
+      controller_info
+      pr_info
+      cc_info
+    end
   end
 
   # Get controller information
@@ -73,22 +61,28 @@ class Megaraid
     # this command will return the properties in pairs, transforming into key/value
     output.fetch('Controllers').each do |controller|
       pr_properties = {}
-      controller.dig('Response Data', 'Controller Properties').each do |attribute|
-        # Let's parse some attributes
-        case attribute['Ctrl_Prop']
-        when 'PR Execution Delay', 'PR iterations completed', 'PR MaxConcurrentPd'
-          pr_properties[attribute['Ctrl_Prop']] = attribute['Value'].to_i
-        when 'PR on SSD'
-          pr_properties[attribute['Ctrl_Prop']] = if attribute['Value'] == 'Disabled'
-                                                    false
-                                                  else
-                                                    true
-                                                  end
-        when 'PR Next Start time'
-          next_start_time = Time.strptime(attribute['Value'], '%m/%d/%Y, %H:%M:%S')
-          pr_properties[attribute['Ctrl_Prop']] = next_start_time.strftime('%A at %H:%M:%S')
-        else
-          pr_properties[attribute['Ctrl_Prop']] = attribute['Value']
+      controller_properties = controller.dig('Response Data', 'Controller Properties') || {}
+      if controller_properties.empty?
+        pr_properties['PR Mode'] = 'Un-supported'
+        pr_properties['PR Next Start time'] = 'Un-supported'
+      else
+        controller_properties.each do |attribute|
+          # Let's parse some attributes
+          case attribute['Ctrl_Prop']
+          when 'PR Execution Delay', 'PR iterations completed', 'PR MaxConcurrentPd'
+            pr_properties[attribute['Ctrl_Prop']] = attribute['Value'].to_i
+          when 'PR on SSD'
+            pr_properties[attribute['Ctrl_Prop']] = if attribute['Value'] == 'Disabled'
+                                                      false
+                                                    else
+                                                      true
+                                                    end
+          when 'PR Next Start time'
+            next_start_time = Time.strptime(attribute['Value'], '%m/%d/%Y, %H:%M:%S')
+            pr_properties[attribute['Ctrl_Prop']] = next_start_time.strftime('%A at %H:%M:%S')
+          else
+            pr_properties[attribute['Ctrl_Prop']] = attribute['Value']
+          end
         end
       end
       @pr_info[controller.dig('Command Status', 'Controller')] = pr_properties
@@ -103,16 +97,22 @@ class Megaraid
     # this command will return the properties in pairs, transforming into key/value
     output.fetch('Controllers').each do |controller|
       cc_properties = {}
-      controller.dig('Response Data', 'Controller Properties').each do |attribute|
-        # Let's parse some attributes
-        case attribute['Ctrl_Prop']
-        when 'CC Execution Delay', 'CC Number of iterations', 'CC Number of VD completed'
-          cc_properties[attribute['Ctrl_Prop']] = attribute['Value'].to_i
-        when 'CC Next Starttime'
-          next_start_time = Time.strptime(attribute['Value'], '%m/%d/%Y, %H:%M:%S')
-          cc_properties[attribute['Ctrl_Prop']] = next_start_time.strftime('%A at %H:%M:%S')
-        else
-          cc_properties[attribute['Ctrl_Prop']] = attribute['Value']
+      controller_properties = controller.dig('Response Data', 'Controller Properties') || {}
+      if controller_properties.empty?
+        cc_properties['CC Operation Mode'] = 'Un-supported'
+        cc_properties['CC Next Starttime'] = 'Un-supported'
+      else
+        controller_properties.each do |attribute|
+          # Let's parse some attributes
+          case attribute['Ctrl_Prop']
+          when 'CC Execution Delay', 'CC Number of iterations', 'CC Number of VD completed'
+            cc_properties[attribute['Ctrl_Prop']] = attribute['Value'].to_i
+          when 'CC Next Starttime'
+            next_start_time = Time.strptime(attribute['Value'], '%m/%d/%Y, %H:%M:%S')
+            cc_properties[attribute['Ctrl_Prop']] = next_start_time.strftime('%A at %H:%M:%S')
+          else
+            cc_properties[attribute['Ctrl_Prop']] = attribute['Value']
+          end
         end
       end
       @cc_info[controller.dig('Command Status', 'Controller')] = cc_properties
