@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 * Support for mpt3sas cards
 
+**Bugfixes**
+
+* Avoid setting unsupported parameters
+
 ## Release 0.3.2
 
 **Features**

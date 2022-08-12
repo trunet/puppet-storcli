@@ -4,10 +4,12 @@
 # @api private
 #
 class storcli::install (
+  # lint:ignore:parameter_types
   $package_manage  = $storcli::package_manage,
   $package_name    = $storcli::package_name,
   $package_ensure  = $storcli::package_ensure,
   $link_storcli_to = $storcli::link_storcli_to,
+  # lint:endignore
 ) inherits storcli {
   assert_private()
 
