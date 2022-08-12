@@ -144,7 +144,7 @@ class storcli::configure (
         if $sync_time_to_controllers {
           if $controller_use_utc {
             exec { "Set time on MegaRAID controller ${c} to UTC":
-              command  => "${storcli} ${c} set time=$(date -u +%Y%m%d %H:%M:%S)",
+              command  => "${storcli} ${c} set time=$(date -u '+%Y%m%d %H:%M:%S')",
               unless   => "${storcli} ${c} show time | grep Time | grep $(date -u '+%Y/%m/%d') | grep $(date -u '+%H:')",
               provider => 'shell',
             }
