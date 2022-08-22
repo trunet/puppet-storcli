@@ -1345,7 +1345,86 @@
 			}
 		]
 	}
+},
+{
+	"Command Status" : {
+		"CLI Version" : "007.2106.0000.0000 Feb 28, 2022",
+		"Operating system" : "Linux 5.14.0-142.el9.x86_64",
+		"Controller" : 2,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Product Name" : "LSI3008-IR",
+		"Serial Number" : "50030480256256f9",
+		"SAS Address" : " 50030480256256f9",
+		"PCI Address" : "00:65:00:00",
+		"System Time" : "08/11/2022 20:05:04",
+		"FW Package Build" : "00.00.00.00",
+		"FW Version" : "16.00.10.00",
+		"BIOS Version" : "08.37.00.00_18.00.00.00",
+		"NVDATA Version" : "14.01.49.39",
+		"Driver Name" : "mpt3sas",
+		"Driver Version" : "40.100.00.00",
+		"Bus Number" : 101,
+		"Device Number" : 0,
+		"Function Number" : 0,
+		"Domain ID" : 0,
+		"Vendor Id" : 4096,
+		"Device Id" : 151,
+		"SubVendor Id" : 5593,
+		"SubDevice Id" : 2056,
+		"Board Name" : "LSI3008-IR",
+		"Board Assembly" : "N/A",
+		"Board Tracer Number" : "N/A",
+		"Security Protocol" : "None",
+		"Physical Drives" : 3,
+		"PD LIST" : [
+			{
+				"EID:Slt" : " :0",
+				"DID" : 0,
+				"State" : "-",
+				"DG" : "-",
+				"Size" : "893.137 GB",
+				"Intf" : "SATA",
+				"Med" : "SSD",
+				"SED" : "-",
+				"PI" : "-",
+				"SeSz" : "512B",
+				"Model" : "Micron_5300_MTFDDAK960TDS",
+				"Sp" : "-"
+			},
+			{
+				"EID:Slt" : " :1",
+				"DID" : 1,
+				"State" : "-",
+				"DG" : "-",
+				"Size" : "893.137 GB",
+				"Intf" : "SATA",
+				"Med" : "SSD",
+				"SED" : "-",
+				"PI" : "-",
+				"SeSz" : "512B",
+				"Model" : "Micron_5300_MTFDDAK960TDS",
+				"Sp" : "-"
+			},
+			{
+				"EID:Slt" : " :2",
+				"DID" : 2,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "3.492 TB",
+				"Intf" : "SATA",
+				"Med" : "SSD",
+				"SED" : "-",
+				"PI" : "-",
+				"SeSz" : "512B",
+				"Model" : "Micron_5300_MTFDDAK3T8TDS",
+				"Sp" : "-"
+			}
+		],
+		"Requested Boot Drive" : "Not Set"
+	}
 }
 ]
 }
-

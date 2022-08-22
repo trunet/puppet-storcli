@@ -89,7 +89,15 @@
 			}
 		]
 	}
+},
+{
+	"Command Status" : {
+		"CLI Version" : "007.2106.0000.0000 Feb 28, 2022",
+		"Operating system" : "Linux 5.14.0-142.el9.x86_64",
+		"Controller" : 2,
+		"Status" : "Failure",
+		"Description" : "Un-supported Command"
+	}
 }
 ]
 }
-
