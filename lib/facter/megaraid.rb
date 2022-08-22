@@ -36,7 +36,7 @@ class Megaraid
 
   # Function to call all get methods
   def all_info
-    Dir.chdir("/tmp") do
+    Dir.chdir('/tmp') do
       controller_info
       pr_info
       cc_info
