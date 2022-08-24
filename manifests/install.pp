@@ -19,7 +19,7 @@ class storcli::install (
       ensure => $package_ensure,
     }
 
-    if $facts['megaraid']['storcli'] {
+    unless $facts['megaraid']['storcli'].empty {
       unless dirname($facts['megaraid']['storcli']) == $link_storcli_to {
         $basename_storcli = basename($facts['megaraid']['storcli'])
         file { "${link_storcli_to}/${basename_storcli}":

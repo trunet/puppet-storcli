@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.4.1
+
+**Bugfixes**
+
+* Smarter check for the "`usr/sbin`" link
+
 ## Release 0.4.0
 
 **Features**
