@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.4.2
+
+**Bugfixes**
+
+* Fix missing chdir making storcli.log files in cwd
+
 ## Release 0.4.1
 
 **Bugfixes**

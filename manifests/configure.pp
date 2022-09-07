@@ -337,6 +337,7 @@ class storcli::configure (
             command  => "${storcli} ${c} set cc delay=${controller_consistencycheck_delay}",
             unless   => "${storcli} ${c} show cc | grep 'PR Execution Delay' | grep ${controller_consistencycheck_delay}",
             onlyif   => "${storcli} ${c} show cc | grep 'Status = Success'",
+            cwd      => '/tmp',
             provider => 'shell',
           }
           exec { "Set consistency check rate=${controller_consistencycheck_rate}% on MegaRAID controller ${c}":
