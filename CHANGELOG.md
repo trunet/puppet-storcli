@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.4.3
+
+**Bugfixes**
+
+* Fix a few typos for service detection
+* Ignore alarm on cards without alarms
+
 ## Release 0.4.2
 
 **Bugfixes**
