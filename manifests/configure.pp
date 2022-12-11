@@ -142,8 +142,8 @@ class storcli::configure (
 
           exec { "Set rebuildrate=${controller_rebuildrate}% on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set rebuildrate=${controller_rebuildrate}",
-            unless   => "${storcli} ${c} show autorebuild | grep '\"Value\" : \"${controller_rebuildrate}%\"'",
-            onlyif   => "${storcli} ${c} show autorebuild | grep 'Status = Success'",
+            unless   => "${storcli} ${c} show rebuildrate | grep Rebuildrate | grep ${controller_rebuildrate}%",
+            onlyif   => "${storcli} ${c} show rebuildrate | grep 'Status = Success'",
             cwd      => '/tmp',
             provider => 'shell',
           }
@@ -225,7 +225,7 @@ class storcli::configure (
           if $controller_alarm {
             exec { "Enable alarm sound on MegaRAID controller ${c}":
               command  => "${storcli} ${c} set alarm=on",
-              unless   => "${storcli} ${c} show alarm | grep Alarm | grep ON",
+              unless   => ["${storcli} ${c} show alarm | grep Alarm | grep ON", "${storcli} ${c} show alarm | grep ABSENT"],
               onlyif   => "${storcli} ${c} show alarm | grep 'Status = Success'",
               cwd      => '/tmp',
               provider => 'shell',
@@ -233,7 +233,7 @@ class storcli::configure (
           } else {
             exec { "Disable alarm sound on MegaRAID controller ${c}":
               command  => "${storcli} ${c} set alarm=off",
-              unless   => "${storcli} ${c} show alarm | grep Alarm | grep OFF",
+              unless   => ["${storcli} ${c} show alarm | grep Alarm | grep OFF", "${storcli} ${c} show alarm | grep ABSENT"],
               onlyif   => "${storcli} ${c} show alarm | grep 'Status = Success'",
               cwd      => '/tmp',
               provider => 'shell',
@@ -302,7 +302,7 @@ class storcli::configure (
             exec { "Enable patrolread on unconfigured areas on MegaRAID controller ${c}":
               command  => "${storcli} ${c} set patrolread uncfgareas=on",
               unless   => "${storcli} ${c} show patrolRead | grep 'PR on EPD' | grep Enabled",
-              onlyif   => "${storcli} ${c} show patrolRead | grep 'Status = Success'",
+              onlyif   => ["${storcli} ${c} show patrolRead | grep 'Status = Success'", "${storcli} ${c} show patrolRead | grep 'PR on EPD'"],
               cwd      => '/tmp',
               provider => 'shell',
             }
@@ -310,7 +310,7 @@ class storcli::configure (
             exec { "Disable patrolread on unconfigured areas on MegaRAID controller ${c}":
               command  => "${storcli} ${c} set patrolread uncfgareas=off",
               unless   => "${storcli} ${c} show patrolRead | grep 'PR on EPD' | grep Disabled",
-              onlyif   => "${storcli} ${c} show patrolRead | grep 'Status = Success'",
+              onlyif   => ["${storcli} ${c} show patrolRead | grep 'Status = Success'", "${storcli} ${c} show patrolRead | grep 'PR on EPD'"],
               cwd      => '/tmp',
               provider => 'shell',
             }
@@ -327,15 +327,15 @@ class storcli::configure (
           }
         } else {
           exec { "Enable consistency check mode=${controller_consistencycheck_mode} on MegaRAID controller ${c}":
-            command  => "${storcli} ${c} set cc=${controller_consistencycheck_mode} startime=$(date -u '+%Y/%m/%d') 23",
-            unless   => "${storcli} ${c} show cc | grep 'CC Mode' | grep -i ${controller_consistencycheck_mode}",
+            command  => "${storcli} ${c} set cc=${controller_consistencycheck_mode} starttime=\"$(date -u '+%Y/%m/%d') 23\"",
+            unless   => "${storcli} ${c} show cc | grep -e 'CC Mode\|CC Operation Mode' | grep -i ${controller_consistencycheck_mode}",
             onlyif   => "${storcli} ${c} show cc | grep 'Status = Success'",
             cwd      => '/tmp',
             provider => 'shell',
           }
           exec { "Set consistency check delay=${controller_consistencycheck_delay} on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set cc delay=${controller_consistencycheck_delay}",
-            unless   => "${storcli} ${c} show cc | grep 'PR Execution Delay' | grep ${controller_consistencycheck_delay}",
+            unless   => "${storcli} ${c} show cc | grep 'CC Execution Delay' | grep ${controller_consistencycheck_delay}",
             onlyif   => "${storcli} ${c} show cc | grep 'Status = Success'",
             cwd      => '/tmp',
             provider => 'shell',
