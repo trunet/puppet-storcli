@@ -13,11 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Set up Ruby 2.6
+    - name: Set up Ruby 2.7
       id: setup-ruby
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.6.x
+        ruby-version: 2.7
 
     - uses: actions/cache@v1
       with:
@@ -29,10 +29,11 @@ jobs:
     - name: Install dependencies
       id: install-dependencies
       run: |
-        wget https://apt.puppet.com/puppet-tools-release-bionic.deb https://apt.puppetlabs.com/puppet6-release-bionic.deb
-        sudo dpkg -i puppet-tools-release-bionic.deb puppet6-release-bionic.deb
+        wget https://apt.puppet.com/puppet-release-focal.deb https://apt.puppet.com/puppet-tools-release-focal.deb
+        sudo dpkg -i puppet*.deb
         sudo apt-get update -y
         sudo apt-get install -y pdk puppet-agent
+        rm -f puppet*.deb
         source /etc/profile
         mkdir -p ~/.facter/facts.d
         mkdir -p ~/.puppetlabs/opt/facter/facts.d
