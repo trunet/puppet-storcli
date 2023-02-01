@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.4.4
+
+**Features**
+
+* Now using `nolog` mode for `storcli` commands
+
 ## Release 0.4.3
 
 **Bugfixes**
