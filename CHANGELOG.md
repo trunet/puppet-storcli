@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.4.5
+
+**Features**
+
+* Note compatibility with stdlib 9.x.x
+
 ## Release 0.4.4
 
 **Features**
