@@ -47,7 +47,12 @@ class Megaraid
   def controller_info
     @controller_info = {}
     return unless @storcli
-    output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /call show J nolog"))
+    nolog = if @storcli.include? 'perccli'
+              ''
+            else
+              'nolog'
+            end
+    output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /call show J #{nolog}"))
     output.fetch('Controllers').each do |controller|
       @controller_info[controller.dig('Command Status', 'Controller')] = controller.fetch('Response Data')
     end
@@ -57,7 +62,12 @@ class Megaraid
   def pr_info
     @pr_info = {}
     return unless @storcli
-    output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /call show patrolread J nolog"))
+    nolog = if @storcli.include? 'perccli'
+              ''
+            else
+              'nolog'
+            end
+    output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /call show patrolread J #{nolog}"))
     # this command will return the properties in pairs, transforming into key/value
     output.fetch('Controllers').each do |controller|
       pr_properties = {}
@@ -93,7 +103,12 @@ class Megaraid
   def cc_info
     @cc_info = {}
     return unless @storcli
-    output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /call show cc J nolog"))
+    nolog = if @storcli.include? 'perccli'
+              ''
+            else
+              'nolog'
+            end
+    output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /call show cc J #{nolog}"))
     # this command will return the properties in pairs, transforming into key/value
     output.fetch('Controllers').each do |controller|
       cc_properties = {}

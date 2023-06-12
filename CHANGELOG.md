@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.4.6
+
+**Bugfixes**
+
+* perccli doesn't support `nolog` so don't use it there
+
 ## Release 0.4.5
 
 **Features**
