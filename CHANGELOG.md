@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.4.6
+
+**Features**
+
+* Correctly detect package name for Dell systems (perccli)
+
 ## Release 0.4.5
 
 **Features**
