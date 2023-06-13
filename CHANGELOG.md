@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Release 0.4.6
 
+**BREAKING CHANGE**
+
+* The parameter `link_storcli_to` is now the full path for the created link
+
 **Features**
 
 * Correctly detect package name for Dell systems (perccli)

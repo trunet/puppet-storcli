@@ -56,7 +56,7 @@ describe 'storcli' do
 
           describe 'is storcli binary symlinked to target location' do
             it {
-              is_expected.to contain_file('/tmp/sbin/storcli') \
+              is_expected.to contain_file('/tmp/sbin') \
                 .with_ensure('link') \
                 .with_target('/non/default/storcli')
             }
