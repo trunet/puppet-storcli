@@ -25,14 +25,20 @@ This puppet module generate facts and provides types and providers to manage LSI
 
 ### Setup Requirements
 
-This module makes use of storcli. The package needs to be available from some repository to be installed.
+This module makes use of `storcli`.  If running on a Dell server, the module will look to use `perccli` instead.
 
-If running on a Dell server, the module will look to use perccli if it exists. The perccli package will need to be installed separately from this module.
+The package needs to be available from some repository to be installed.
 
 ## Usage
 
-```
+```puppet
 include storcli
+```
+
+Optionally, to skip over configuration of the card.
+
+```yaml
+storcli::configure_settings: false
 ```
 
 ## Reference
@@ -44,8 +50,8 @@ See [REFERENCE](REFERENCE.md) for all other reference documentation.
 ### Facts
 
 - **megaraid** - structured fact
-  - **present?** - Boolean - check if /sys/bus/pci/drivers/megaraid_sas is present?
-  - **storcli** - String - location of storcli application.
+  - **present?** - Boolean - check if `/sys/bus/pci/drivers/megaraid_sas` is present?
+  - **storcli** - String - location of `storcli`/`perccli` application.
   - **number_of_controllers** - Integer - number of megaraid controllers found
   - **controllers** - Hash[Controller number] - structured fact of megaraid controller informations
     - **product_name** - String - Product name
@@ -74,6 +80,19 @@ See [REFERENCE](REFERENCE.md) for all other reference documentation.
 ## Limitations
 
 For now, this module only provides a custom fact and ways to deal with patrol read and consistency check.
+
+This module does not provide the `storcli` or `perccli` packages, you must do that yourself.  If the `package` provider can load them, they will be installed automatically.
+
+The card configuration has not been tested on systems with multiple MegaRAID cards.  It should work, but it will set all cards to identical values.
+
+Minimum `storcli`/`perccli` versions:
+
+```
+PercCli SAS Customization Utility Ver 007.2313.0000.0000 Mar 07, 2023
+StorCli SAS Customization Utility Ver 007.2508.0000.0000 Feb 27, 2023
+```
+
+Older versions may work, but may not...
 
 ## Development
 
