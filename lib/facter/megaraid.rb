@@ -46,17 +46,22 @@ class Megaraid
   # Get controller information
   def controller_info
     @controller_info = {}
+    return unless present?
     return unless @storcli
     output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /call show J nolog"))
     output.fetch('Controllers').each do |controller|
-      @controller_info[controller.dig('Command Status', 'Controller')] = controller.fetch('Response Data')
+      if controller.dig('Command Status', 'Status') != 'Failure'
+        @controller_info[controller.dig('Command Status', 'Controller')] = controller.fetch('Response Data', {})
+      end
     end
   end
 
   # Get patrol read information
   def pr_info
     @pr_info = {}
+    return unless present?
     return unless @storcli
+    return unless num_controllers > 0
     output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /call show patrolread J nolog"))
     # this command will return the properties in pairs, transforming into key/value
     output.fetch('Controllers').each do |controller|
@@ -92,7 +97,9 @@ class Megaraid
   # Get consistency check information
   def cc_info
     @cc_info = {}
+    return unless present?
     return unless @storcli
+    return unless num_controllers > 0
     output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /call show cc J nolog"))
     # this command will return the properties in pairs, transforming into key/value
     output.fetch('Controllers').each do |controller|

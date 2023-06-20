@@ -11,6 +11,11 @@ All notable changes to this project will be documented in this file.
 **Features**
 
 * Correctly detect package name for Dell systems (perccli)
+* Note minimum required utility versions
+
+**Bugfixes**
+
+* Graceful failure when card unsupported
 
 ## Release 0.4.5
 

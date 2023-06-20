@@ -94,4 +94,28 @@ describe :megaraid, type: :fact do
       expect(fact.value.fetch('controllers')['2']['consistency_check']['CC Operation Mode']).to eq('Un-supported')
     end
   end
+
+  context 'module present, storcli present, card unsupported' do
+    before :each do
+      allow(Dir).to receive(:exist?).and_return(true)
+      allow(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/mpt3sas').and_return(true)
+      expect(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/megaraid_sas').and_return(true)
+
+      expect(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return('/example/path').twice
+      expect(Facter::Util::Resolution).not_to receive(:which).with('/opt/MegaRAID/storcli/storcli64')
+      expect(Facter::Util::Resolution).not_to receive(:which).with('storcli')
+      expect(Facter::Util::Resolution).not_to receive(:which).with('/opt/MegaRAID/storcli/storcli')
+
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show J nolog').and_return(File.read('spec/fixtures/perccli_call_show_fail.json'))
+      expect(Facter::Util::Resolution).not_to receive(:exec).with('/example/path /call show patrolread J nolog')
+      expect(Facter::Util::Resolution).not_to receive(:exec).with('/example/path /call show cc J nolog')
+    end
+
+    it do
+      expect(fact.value['present?']).to eq(true)
+      expect(fact.value['storcli']).to eq('/example/path')
+      expect(fact.value['number_of_controllers']).to eq(0)
+      expect(fact.value['controllers'].count).to eq(0)
+    end
+  end
 end
