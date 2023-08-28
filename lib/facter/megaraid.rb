@@ -146,9 +146,36 @@ class Megaraid
         vd[vd_id]['State'] = item.fetch('State')
         vd[vd_id]['Strip Size'] = vd_output.fetch('Strip Size')
 
-        vd[vd_id]['Name'] = item.fetch('Name', '')
-        vd[vd_id]['Write Cache'] = vd_output.fetch('Write Cache(initial setting)', '')
+        if item['Cache'].include?('AWB')
+          vd[vd_id]['Write Cache'] = 'awb'
+        elsif item['Cache'].include?('WB')
+          vd[vd_id]['Write Cache'] = 'wb'
+        elsif item['Cache'].include?('WT')
+          vd[vd_id]['Write Cache'] = 'wt'
+        end
+
+        if item['Cache'].start_with?('R')
+          vd[vd_id]['Read Cache'] = 'ra'
+        elsif item['Cache'].start_with?('NR')
+          vd[vd_id]['Read Cache'] = 'nora'
+        end
+
+        if item['Cache'].end_with?('D')
+          vd[vd_id]['IO Policy'] = 'direct'
+        elsif item['Cache'].end_with?('C')
+          vd[vd_id]['IO Policy'] = 'cached'
+        end
+
         vd[vd_id]['Physical Drive Cache'] = vd_output.fetch('Disk Cache Policy', '')
+        if vd[vd_id]['Physical Drive Cache'] == 'Disk\'s Default'
+          vd[vd_id]['Physical Drive Cache'] = 'default'
+        elsif vd[vd_id]['Physical Drive Cache'] == 'Enabled'
+          vd[vd_id]['Physical Drive Cache'] = 'on'
+        elsif vd[vd_id]['Physical Drive Cache'] == 'Disabled'
+          vd[vd_id]['Physical Drive Cache'] = 'off'
+        end
+
+        vd[vd_id]['Name'] = item.fetch('Name', '')
         vd[vd_id]['Encryption'] = vd_output.fetch('Encryption', '')
       end
 
