@@ -65,6 +65,8 @@ See [REFERENCE](REFERENCE.md) for all other reference documentation.
       - **State** - String - State of Virtual Disk
       - **Strip Size** - String - Strip Size of Virtual Disk
       - **Write Cache** - String - Write Cache Mode of Virtual Disk
+      - **Read Cache** - String - Read Cache Mode of Virtual Disk
+      - **IO Policy** - String - IO Policy of Virtual Disk
       - **Physical Drive Cache** - String - Physical Drive Cache Mode of Virtual Disk
       - **Encryption** - String - Encryption Mode of Virtual Disk
     - **patrol_read** - Hash - Patrol read information
