@@ -2,11 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## NEXT
+## Release 1.1.0
 
 **Features**
 
 * Extend fact to report information about virtual drives per controller
+* Note puppet8 support
 
 **Bugfixes**
 
