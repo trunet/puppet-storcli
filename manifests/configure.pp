@@ -115,6 +115,7 @@ class storcli::configure (
   $controller_consistencycheck_rate = $storcli::controller_consistencycheck_rate,
   # lint:endignore
 ) inherits storcli {
+  # lint:ignore:check_unsafe_interpolations lint:ignore:140chars
   if $configure_settings {
     if $facts['megaraid']['storcli'] {
       keys($facts['megaraid']['controllers']).each |$x| {
@@ -328,7 +329,7 @@ class storcli::configure (
         } else {
           exec { "Enable consistency check mode=${controller_consistencycheck_mode} on MegaRAID controller ${c}":
             command  => "${storcli} ${c} set cc=${controller_consistencycheck_mode} starttime=\"$(date -u '+%Y/%m/%d') 23\" nolog",
-            unless   => "${storcli} ${c} show cc nolog | grep -e 'CC Mode\|CC Operation Mode' | grep -i ${controller_consistencycheck_mode}",
+            unless   => "${storcli} ${c} show cc nolog | grep -e 'CC Mode\\|CC Operation Mode' | grep -i ${controller_consistencycheck_mode}",
             onlyif   => "${storcli} ${c} show cc nolog | grep 'Status = Success'",
             cwd      => '/tmp',
             provider => 'shell',
@@ -352,3 +353,4 @@ class storcli::configure (
     }
   }
 }
+# lint:endignore

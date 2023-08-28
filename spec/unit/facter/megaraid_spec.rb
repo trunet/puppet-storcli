@@ -97,8 +97,14 @@ describe :megaraid, type: :fact do
       expect(fact.value.fetch('controllers')['2']['consistency_check']['CC Operation Mode']).to eq('Un-supported')
 
       # virtual drives
-      expect(fact.value.fetch('controllers')['0']['virtual_drives']).to eq("0" => {"Encryption"=>"None", "IO Policy"=>"direct", "Name"=>"storage1", "Physical Drive Cache"=>"default", "Read Cache"=>"ra", "State"=>"Optl", "Strip Size"=>"256 KB", "Type"=>"RAID6", "Write Cache"=>"wb"})
-      expect(fact.value.fetch('controllers')['1']['virtual_drives']).to eq("0" => {"Encryption"=>"None", "IO Policy"=>"direct", "Name"=>"storage2", "Physical Drive Cache"=>"default", "Read Cache"=>"ra", "State"=>"Optl", "Strip Size"=>"256 KB", "Type"=>"RAID6", "Write Cache"=>"wb"}, "234" => {"Encryption"=>"None", "IO Policy"=>"direct", "Name"=>"OS", "Physical Drive Cache"=>"default", "Read Cache"=>"ra", "State"=>"Optl", "Strip Size"=>"256 KB", "Type"=>"RAID1", "Write Cache"=>"wb"})
+      expect(fact.value.fetch('controllers')['0']['virtual_drives']).to eq('0' => { 'Encryption' => 'None', 'IO Policy' => 'direct', 'Name' => 'storage1', 'Physical Drive Cache' => 'default',
+                                                                                    'Read Cache' => 'ra', 'State' => 'Optl', 'Strip Size' => '256 KB', 'Type' => 'RAID6', 'Write Cache' => 'wb' })
+      expect(fact.value.fetch('controllers')['1']['virtual_drives']).to eq(
+        '0' => { 'Encryption' => 'None', 'IO Policy' => 'direct', 'Name' => 'storage2', 'Physical Drive Cache' => 'default', 'Read Cache' => 'ra', 'State' => 'Optl', 'Strip Size' => '256 KB',
+                 'Type' => 'RAID6', 'Write Cache' => 'wb' },
+        '234' => { 'Encryption' => 'None', 'IO Policy' => 'direct', 'Name' => 'OS', 'Physical Drive Cache' => 'default', 'Read Cache' => 'ra', 'State' => 'Optl', 'Strip Size' => '256 KB',
+                   'Type' => 'RAID1', 'Write Cache' => 'wb' },
+      )
       expect(fact.value.fetch('controllers')['2']['virtual_drives']).to eq({})
     end
   end
