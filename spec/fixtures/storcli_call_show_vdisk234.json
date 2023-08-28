@@ -1,0 +1,113 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.2508.0000.0000 Feb 27, 2023",
+		"Operating system" : "Linux 5.14.0-284.11.1.el9_2.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"/c0/v234" : [
+			{
+				"DG/VD" : "1/234",
+				"TYPE" : "RAID10",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "No",
+				"Cache" : "RWBD",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "3.491 TB",
+				"Name" : "HOME"
+			}
+		],
+		"PDs for VD 234" : [
+			{
+				"EID:Slt" : "252:6",
+				"DID" : 9,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "1.745 TB",
+				"Intf" : "NVMe",
+				"Med" : "SSD",
+				"SED" : "Y",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "SAMSUNG MZQL21T9HCJR-00A07              ",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:7",
+				"DID" : 8,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "1.745 TB",
+				"Intf" : "NVMe",
+				"Med" : "SSD",
+				"SED" : "Y",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "SAMSUNG MZQL21T9HCJR-00A07              ",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:8",
+				"DID" : 7,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "1.745 TB",
+				"Intf" : "NVMe",
+				"Med" : "SSD",
+				"SED" : "Y",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "SAMSUNG MZQL21T9HCJR-00A07              ",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:9",
+				"DID" : 6,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "1.745 TB",
+				"Intf" : "NVMe",
+				"Med" : "SSD",
+				"SED" : "Y",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "SAMSUNG MZQL21T9HCJR-00A07              ",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"VD234 Properties" : {
+			"Strip Size" : "256 KB",
+			"Number of Blocks" : 7499284480,
+			"VD has Emulated PD" : "No",
+			"Span Depth" : 2,
+			"Number of Drives Per Span" : 2,
+			"Write Cache(initial setting)" : "WriteBack",
+			"Disk Cache Policy" : "Disk's Default",
+			"Encryption" : "None",
+			"Data Protection" : "None",
+			"Active Operations" : "None",
+			"Exposed to OS" : "Yes",
+			"OS Drive Name" : "/dev/sdb",
+			"Creation Date" : "15-06-2023",
+			"Creation Time" : "02:46:26 PM",
+			"Emulation type" : "default",
+			"Cachebypass size" : "Cachebypass-64k",
+			"Cachebypass Mode" : "Cachebypass Intelligent",
+			"Is LD Ready for OS Requests" : "Yes",
+			"SCSI NAA Id" : "6a0042bb0fccfec02c14e04218ae3545",
+			"Unmap Enabled" : "No"
+		}
+	}
+}
+]
+}

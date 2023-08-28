@@ -1047,7 +1047,7 @@
 				"TR" : "N"
 			}
 		],
-		"Virtual Drives" : 1,
+		"Virtual Drives" : 2,
 		"VD LIST" : [
 			{
 				"DG/VD" : "0/0",
@@ -1060,6 +1060,19 @@
 				"sCC" : "ON",
 				"Size" : "55.881 TB",
 				"Name" : "storage2"
+                        },
+                        {
+                                "DG/VD" : "0/234",
+                                "TYPE" : "RAID1",
+                                "State" : "Optl",
+                                "Access" : "RW",
+                                "Consist" : "Yes",
+                                "Cache" : "RWBD",
+                                "Cac" : "-",
+                                "sCC" : "ON",
+                                "Size" : "893.750 GB",
+                                "Name" : "OS"
+
 			}
 		],
 		"Physical Drives" : 18,

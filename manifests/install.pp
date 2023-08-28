@@ -21,7 +21,7 @@ class storcli::install (
 
     unless $facts['megaraid']['storcli'].empty {
       unless $facts['megaraid']['storcli'] == $link_storcli_to {
-        file { "${link_storcli_to}":
+        file { $link_storcli_to:
           ensure => 'link',
           target => $facts['megaraid']['storcli'],
         }
