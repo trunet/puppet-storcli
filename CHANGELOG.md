@@ -5,7 +5,12 @@ All notable changes to this project will be documented in this file.
 ## NEXT
 
 **Features**
+
 * Extend fact to report information about virtual drives per controller
+
+**Bugfixes**
+
+* Try to fix autodetection on Dell systems
 
 ## Release 1.0.0
 
