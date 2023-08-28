@@ -59,6 +59,14 @@ See [REFERENCE](REFERENCE.md) for all other reference documentation.
     - **fw_package_build** - String - Firmware Package Build
     - **fw_version** - String - Firmware Version
     - **bios_version** - String - Controller BIOS Version
+    - **virtual_drives** - Hash - Drive settings per virtual drive
+      - **Name** - String - Name of Virtual Disk
+      - **Type** - String - Type of RAID
+      - **State** - String - State of Virtual Disk
+      - **Strip Size** - String - Strip Size of Virtual Disk
+      - **Write Cache** - String - Write Cache Mode of Virtual Disk
+      - **Physical Drive Cache** - String - Physical Drive Cache Mode of Virtual Disk
+      - **Encryption** - String - Encryption Mode of Virtual Disk
     - **patrol_read** - Hash - Patrol read information
       - **PR Mode** - String - Mode
       - **PR Execution Delay** - Integer - Execution delay in hours

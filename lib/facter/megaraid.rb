@@ -135,6 +135,23 @@ class Megaraid
   def controllers_info
     ctrls = {}
     @controller_info.each do |controller, parameters|
+      vd = {}
+      parameters.fetch('VD LIST', []).each do |item|
+        next unless item.key?('DG/VD')
+        vd_id = item['DG/VD'].split('/')[1]
+        vd[vd_id] = {}
+
+        vd_output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /c#{controller}/v#{vd_id} show all J nolog")).fetch('Controllers')[0].dig('Response Data', "VD#{vd_id} Properties")
+        vd[vd_id]['Type'] = item.fetch('TYPE')
+        vd[vd_id]['State'] = item.fetch('State')
+        vd[vd_id]['Strip Size'] = vd_output.fetch('Strip Size')
+
+        vd[vd_id]['Name'] = item.fetch('Name', '')
+        vd[vd_id]['Write Cache'] = vd_output.fetch('Write Cache(initial setting)', '')
+        vd[vd_id]['Physical Drive Cache'] = vd_output.fetch('Disk Cache Policy', '')
+        vd[vd_id]['Encryption'] = vd_output.fetch('Encryption', '')
+      end
+
       ctrls[controller] = {
         # Basics
         'product_name'  => parameters.fetch('Product Name'),
@@ -144,6 +161,9 @@ class Megaraid
         'fw_package_build' => parameters.fetch('FW Package Build'),
         'fw_version'       => parameters.fetch('FW Version'),
         'bios_version'     => parameters.fetch('BIOS Version'),
+
+        # virtual drives
+        'virtual_drives'   => vd,
 
         # Patrol Read
         'patrol_read' => @pr_info[controller],

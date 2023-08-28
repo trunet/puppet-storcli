@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## NEXT
+
+**Features**
+* Extend fact to report information about virtual drives per controller
+
 ## Release 1.0.0
 
 **BREAKING CHANGE**

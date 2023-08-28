@@ -66,6 +66,9 @@ describe :megaraid, type: :fact do
       expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show J nolog').and_return(File.read('spec/fixtures/storcli_call_show.json'))
       expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show patrolread J nolog').and_return(File.read('spec/fixtures/storcli_call_show_patrolread.json'))
       expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show cc J nolog').and_return(File.read('spec/fixtures/storcli_call_show_cc.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /c0/v0 show all J nolog').and_return(File.read('spec/fixtures/storcli_call_show_vdisk0.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /c1/v0 show all J nolog').and_return(File.read('spec/fixtures/storcli_call_show_vdisk0.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /c1/v234 show all J nolog').and_return(File.read('spec/fixtures/storcli_call_show_vdisk234.json'))
     end
 
     it do
@@ -92,6 +95,15 @@ describe :megaraid, type: :fact do
       expect(fact.value.fetch('controllers')['1']['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
       expect(fact.value.fetch('controllers')['2']['consistency_check']['CC Next Starttime']).to eq('Un-supported')
       expect(fact.value.fetch('controllers')['2']['consistency_check']['CC Operation Mode']).to eq('Un-supported')
+
+      # virtual drives
+      expect(fact.value.fetch('controllers')['0']['virtual_drives']).to eq('0' => { 'Encryption' => 'None', 'Name' => 'storage1', 'Physical Drive Cache' => 'Disk\'s Default', 'State' => 'Optl',
+'Strip Size' => '256 KB', 'Type' => 'RAID6', 'Write Cache' => 'WriteBack' })
+      expect(fact.value.fetch('controllers')['1']['virtual_drives']).to eq(
+'0' => { 'Encryption' => 'None', 'Name' => 'storage2', 'Physical Drive Cache' => "Disk's Default", 'State' => 'Optl', 'Strip Size' => '256 KB', 'Type' => 'RAID6',
+'Write Cache' => 'WriteBack' }, '234' => { 'Encryption' => 'None', 'Name' => 'OS', 'Physical Drive Cache' => "Disk's Default", 'State' => 'Optl', 'Strip Size' => '256 KB', 'Type' => 'RAID1', 'Write Cache' => 'WriteBack' }
+)
+      expect(fact.value.fetch('controllers')['2']['virtual_drives']).to eq({})
     end
   end
 
