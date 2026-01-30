@@ -145,7 +145,13 @@ describe :megaraid, type: :fact do
       expect(fact.value.fetch('controllers')['0']['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
 
       # virtual drives
-      expect(fact.value.fetch('controllers')['0']['virtual_drives']).to eq("238" => {"Encryption"=>"None", "IO Policy"=>"direct", "Name"=>"", "Physical Drive Cache"=>"default", "Read Cache"=>"ra", "State"=>"Optl", "Strip Size"=>"256 KB", "Type"=>"RAID10", "Write Cache"=>"wb"}, "239" => {"Encryption"=>"None", "IO Policy"=>"direct", "Name"=>"", "Physical Drive Cache"=>"default", "Read Cache"=>"ra", "State"=>"Optl", "Strip Size"=>"256 KB", "Type"=>"RAID1", "Write Cache"=>"wb"})
+      expect(fact.value.fetch('controllers')['0']['virtual_drives']).to eq(
+             '238' => { 'Encryption' => 'None', 'IO Policy' => 'direct', 'Name' => '', 'Physical Drive Cache' => 'default',
+                        'Read Cache' => 'ra', 'State' => 'Optl', 'Strip Size' => '256 KB', 'Type' => 'RAID10',
+                        'Write Cache' => 'wb' },
+             '239' => { 'Encryption' => 'None', 'IO Policy' => 'direct', 'Name' => '', 'Physical Drive Cache' => 'default',
+                        'Read Cache' => 'ra', 'State' => 'Optl', 'Strip Size' => '256 KB', 'Type' => 'RAID1', 'Write Cache' => 'wb' },
+           )
     end
   end
 
