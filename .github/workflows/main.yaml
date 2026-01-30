@@ -85,13 +85,15 @@ jobs:
 
       - name: Verify artifact size
         run: |
-          FILE=./pkg/trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz
+          FILE=./trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz
           if [ ! -f "$FILE" ]; then
             echo "Artifact not found: $FILE"
+            echo "---"
+            ls -l *
             exit 1
           fi
           FILESIZE=$(stat -c%s "$FILE")
-          echo "Artifact size: $FILESIZE bytes"
+          echo "Artifact:${FILE} size: $FILESIZE bytes"
           if [ "$FILESIZE" -le 512 ]; then
             echo "Artifact size is too small (<= 512 bytes). Failing."
             exit 1
@@ -114,7 +116,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./pkg/trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz
+          asset_path: ./trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz
           asset_name: trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz
           asset_content_type: application/gzip
 
@@ -124,7 +126,7 @@ jobs:
         run: |
           curl --fail --silent --max-time 5 --show-error --connect-timeout 5 \
             --request 'POST' \
-            --form file="@./pkg/trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz" \
+            --form file="@./trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz" \
             --header 'Content-Type: multipart/form-data' \
             --header "Authorization: Bearer $PUPPET_FORGE_APIKEY" \
             "https://forgeapi.puppet.com/v3/releases"
