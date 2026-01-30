@@ -11,34 +11,60 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Install jq and sed
+        run: |
+          apt-get update
+          apt-get install -y jq sed
+
       - name: Validate
         run: pdk validate
 
       - name: Unit tests
         run: pdk test unit
 
-      - name: Install tools
-        run: |
-          apt-get update
-          apt-get install sed jq -y
-
-      - name: Check same metadata.json and git tag
-        id: check-metadata-git-tag
+      - name: Check metadata version matches git tag
+        if: startsWith(github.ref, 'refs/tags/v')
         run: |
           VERSION_METADATA=$(jq -r .version metadata.json)
-          VERSION_GIT=$(echo $GITHUB_REF | sed 's/refs\/tags\/v//')
-          [ "$VERSION_METADATA" != "$VERSION_GIT" ] && exit 1
-          echo "VERSION=$VERSION_METADATA" >> $GITHUB_OUTPUT
+          VERSION_GIT=${GITHUB_REF#refs/tags/v}
+          if [ "$VERSION_METADATA" != "$VERSION_GIT" ]; then
+            echo "Version mismatch: metadata.json version ($VERSION_METADATA) does not match git tag ($VERSION_GIT)"
+            exit 1
+          fi
 
-      - name: Build
+      - name: Build package
         run: pdk build
 
-      - name: Upload build artifact
+      - name: Set version from tag
         if: startsWith(github.ref, 'refs/tags/v')
-        uses: actions/upload-artifact@v3
+        id: set_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Verify artifact size
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          FILE=./pkg/trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz
+          if [ ! -f "$FILE" ]; then
+            echo "Artifact not found: $FILE"
+            exit 1
+          fi
+          FILESIZE=$(stat -c%s "$FILE")
+          echo "Artifact size: $FILESIZE bytes"
+          if [ "$FILESIZE" -le 512 ]; then
+            echo "Artifact size is too small (<= 512 bytes). Failing."
+            exit 1
+          fi
+
+      - name: Upload built package artifact
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: actions/upload-artifact@v6
         with:
           name: built-package
-          path: ./pkg/trunet-storcli-${{ steps.check-metadata-git-tag.outputs.VERSION }}.tar.gz
+          path: ./pkg/trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz
+          compression-level: 6
+          overwrite: false
+          include-hidden-files: false
+          if-no-files-found: error
 
   release:
     runs-on: ubuntu-latest
@@ -48,12 +74,31 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Download built package
-        uses: actions/download-artifact@v3
+      - name: Set version from tag
+        id: set_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Download built package artifact
+        uses: actions/download-artifact@v6
         with:
           name: built-package
 
+      - name: Verify artifact size
+        run: |
+          FILE=./pkg/trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz
+          if [ ! -f "$FILE" ]; then
+            echo "Artifact not found: $FILE"
+            exit 1
+          fi
+          FILESIZE=$(stat -c%s "$FILE")
+          echo "Artifact size: $FILESIZE bytes"
+          if [ "$FILESIZE" -le 512 ]; then
+            echo "Artifact size is too small (<= 512 bytes). Failing."
+            exit 1
+          fi
+
       - name: Create Github Release
+        id: create_release
         uses: actions/create-release@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -68,9 +113,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./pkg/trunet-storcli-${{ steps.check-metadata-git-tag.outputs.VERSION }}.tar.gz
-          asset_name: trunet-storcli-${{ steps.check-metadata-git-tag.outputs.VERSION }}.tar.gz
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz
+          asset_name: trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz
           asset_content_type: application/gzip
 
       - name: Puppet forge release
@@ -79,7 +124,7 @@ jobs:
         run: |
           curl --fail --silent --max-time 5 --show-error --connect-timeout 5 \
             --request 'POST' \
-            --form file="@./pkg/trunet-storcli-${{ steps.check-metadata-git-tag.outputs.VERSION }}.tar.gz" \
+            --form file="@./pkg/trunet-storcli-${{ steps.set_version.outputs.VERSION }}.tar.gz" \
             --header 'Content-Type: multipart/form-data' \
             --header "Authorization: Bearer $PUPPET_FORGE_APIKEY" \
             "https://forgeapi.puppet.com/v3/releases"
