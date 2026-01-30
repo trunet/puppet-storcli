@@ -29,14 +29,15 @@ jobs:
     - name: Install dependencies
       id: install-dependencies
       run: |
-        wget https://apt.puppet.com/puppet-release-focal.deb https://apt.puppet.com/puppet-tools-release-focal.deb
-        sudo dpkg -i puppet*.deb
+        source /etc/os-release
+        wget https://apt.puppet.com/puppet-release-${UBUNTU_CODENAME}.deb https://apt.puppet.com/puppet-tools-release-${UBUNTU_CODENAME}.deb
+        sudo dpkg -i puppet-release-${UBUNTU_CODENAME}.deb
+        sudo dpkg -i --force-overwrite puppet-tools-release-${UBUNTU_CODENAME}.deb
         sudo apt-get update -y
         sudo apt-get install -y pdk puppet-agent
         rm -f puppet*.deb
         source /etc/profile
-        mkdir -p ~/.facter/facts.d
-        mkdir -p ~/.puppetlabs/opt/facter/facts.d
+        mkdir -p ~/.facter/facts.d ~/.puppetlabs/opt/facter/facts.d
         pdk bundle config path vendor/bundle
         pdk bundle config set without 'system_tests'
         pdk bundle install --jobs 4 --retry 3
