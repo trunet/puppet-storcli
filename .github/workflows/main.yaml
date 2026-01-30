@@ -2,107 +2,84 @@ name: Puppet Storcli CI/CD
 
 on: [push]
 
-env:
-  PDK_PUPPET_VERSION: '7'
-
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
+    container:
+      image: docker.io/puppet/pdk:nightly
 
     steps:
-    - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
-    - name: Set up Ruby 3.4
-      id: setup-ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.4
+      - name: Validate
+        run: pdk validate
 
-    - uses: actions/cache@v5
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gem-
+      - name: Unit tests
+        run: pdk test unit
 
-    - name: Install dependencies
-      id: install-dependencies
-      run: |
-        source /etc/os-release
-        wget https://apt.puppet.com/puppet-release-${UBUNTU_CODENAME}.deb https://apt.puppet.com/puppet-tools-release-${UBUNTU_CODENAME}.deb
-        sudo dpkg -i puppet-release-${UBUNTU_CODENAME}.deb
-        sudo dpkg -i --force-overwrite puppet-tools-release-${UBUNTU_CODENAME}.deb
-        sudo apt-get update -y
-        sudo apt-get install -y pdk puppet-agent
-        rm -f puppet*.deb
-        source /etc/profile
-        mkdir -p ~/.facter/facts.d ~/.puppetlabs/opt/facter/facts.d
-        pdk bundle config path vendor/bundle
-        pdk bundle config set without 'system_tests'
-        pdk bundle install --jobs 4 --retry 3
+      - name: Install tools
+        run: |
+          apt-get update
+          apt-get install sed jq -y
 
-    - name: Validate
-      id: test-validate
-      run: |
-        pdk validate
+      - name: Check same metadata.json and git tag
+        id: check-metadata-git-tag
+        run: |
+          VERSION_METADATA=$(jq -r .version metadata.json)
+          VERSION_GIT=$(echo $GITHUB_REF | sed 's/refs\/tags\/v//')
+          [ "$VERSION_METADATA" != "$VERSION_GIT" ] && exit 1
+          echo "VERSION=$VERSION_METADATA" >> $GITHUB_OUTPUT
 
-    - name: Unit tests
-      id: test-unit
-      run: |
-        pdk test unit
+      - name: Build
+        run: pdk build
 
-    - name: Check same metadata.json and git tag
-      id: check-metadata-git-tag
-      if: startsWith(github.ref, 'refs/tags/v')
-      run: |
-        VERSION_METADATA=$(jq -r .version metadata.json)
-        VERSION_GIT=$(echo $GITHUB_REF | sed 's/refs\/tags\/v//')
-        [ "$VERSION_METADATA" != "$VERSION_GIT" ] && exit 1
-        echo "::set-output name=VERSION::$VERSION_METADATA"
+      - name: Upload build artifact
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-package
+          path: ./pkg/trunet-storcli-${{ steps.check-metadata-git-tag.outputs.VERSION }}.tar.gz
 
-    - name: Build
-      id: build
-      if: startsWith(github.ref, 'refs/tags/v')
-      run: |
-        pdk build
+  release:
+    runs-on: ubuntu-latest
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/v')
 
-    - name: Create Github Release
-      id: create_release
-      if: startsWith(github.ref, 'refs/tags/v')
-      uses: actions/create-release@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
+    steps:
+      - uses: actions/checkout@v6
 
-    - name: Upload Github Release Asset
-      id: upload-release-asset
-      if: startsWith(github.ref, 'refs/tags/v')
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./pkg/trunet-storcli-${{ steps.check-metadata-git-tag.outputs.VERSION }}.tar.gz
-        asset_name: trunet-storcli-${{ steps.check-metadata-git-tag.outputs.VERSION }}.tar.gz
-        asset_content_type: application/gzip
+      - name: Download built package
+        uses: actions/download-artifact@v3
+        with:
+          name: built-package
 
-    - name: Puppet forge release
-      id: upload-puppetforge
-      if: startsWith(github.ref, 'refs/tags/v')
-      run: |
-        curl \
-          --fail \
-          --silent \
-          --max-time 5 \
-          --show-error \
-          --connect-timeout 5 \
-          --request 'POST' \
-          --form file="@pkg/trunet-storcli-${{ steps.check-metadata-git-tag.outputs.VERSION }}.tar.gz" \
-          --header 'Content-Type: multipart/form-data' \
-          --header "Authorization: Bearer ${{ secrets.PUPPET_FORGE_APIKEY }}" \
-          "https://forgeapi.puppet.com/v3/releases"
+      - name: Create Github Release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Github Release Asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: ./pkg/trunet-storcli-${{ steps.check-metadata-git-tag.outputs.VERSION }}.tar.gz
+          asset_name: trunet-storcli-${{ steps.check-metadata-git-tag.outputs.VERSION }}.tar.gz
+          asset_content_type: application/gzip
+
+      - name: Puppet forge release
+        env:
+          PUPPET_FORGE_APIKEY: ${{ secrets.PUPPET_FORGE_APIKEY }}
+        run: |
+          curl --fail --silent --max-time 5 --show-error --connect-timeout 5 \
+            --request 'POST' \
+            --form file="@./pkg/trunet-storcli-${{ steps.check-metadata-git-tag.outputs.VERSION }}.tar.gz" \
+            --header 'Content-Type: multipart/form-data' \
+            --header "Authorization: Bearer $PUPPET_FORGE_APIKEY" \
+            "https://forgeapi.puppet.com/v3/releases"
