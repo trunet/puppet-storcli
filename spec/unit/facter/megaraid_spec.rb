@@ -36,10 +36,10 @@ describe :megaraid, type: :fact do
       allow(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/mpt3sas').and_return(true)
       expect(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/megaraid_sas').and_return(true)
 
-      expect(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return(nil).twice
-      expect(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli64').and_return(nil).twice
-      expect(Facter::Util::Resolution).to receive(:which).with('storcli').and_return(nil).twice
-      expect(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli').and_return(nil).twice
+      expect(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return(nil)
+      expect(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli64').and_return(nil)
+      expect(Facter::Util::Resolution).to receive(:which).with('storcli').and_return(nil)
+      expect(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli').and_return(nil)
 
       expect(Facter::Util::Resolution).not_to receive(:exec)
     end
@@ -52,23 +52,23 @@ describe :megaraid, type: :fact do
     end
   end
 
-  context 'module present, storcli present' do
+  context 'module present, storcli present on AVAGO 3108 MegaRAID' do
     before :each do
       allow(Dir).to receive(:exist?).and_return(true)
       allow(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/mpt3sas').and_return(true)
       expect(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/megaraid_sas').and_return(true)
 
-      expect(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return('/example/path').twice
+      expect(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return('/example/path')
       expect(Facter::Util::Resolution).not_to receive(:which).with('/opt/MegaRAID/storcli/storcli64')
       expect(Facter::Util::Resolution).not_to receive(:which).with('storcli')
       expect(Facter::Util::Resolution).not_to receive(:which).with('/opt/MegaRAID/storcli/storcli')
 
-      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show J nolog').and_return(File.read('spec/fixtures/storcli_call_show.json'))
-      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show patrolread J nolog').and_return(File.read('spec/fixtures/storcli_call_show_patrolread.json'))
-      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show cc J nolog').and_return(File.read('spec/fixtures/storcli_call_show_cc.json'))
-      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /c0/v0 show all J nolog').and_return(File.read('spec/fixtures/storcli_call_show_vdisk0.json'))
-      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /c1/v0 show all J nolog').and_return(File.read('spec/fixtures/storcli_call_show_vdisk0.json'))
-      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /c1/v234 show all J nolog').and_return(File.read('spec/fixtures/storcli_call_show_vdisk234.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show J nolog').and_return(File.read('spec/fixtures/3108/storcli_call_show.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show patrolread J nolog').and_return(File.read('spec/fixtures/3108/storcli_call_show_patrolread.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show cc J nolog').and_return(File.read('spec/fixtures/3108/storcli_call_show_cc.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /c0/v0 show all J nolog').and_return(File.read('spec/fixtures/3108/storcli_call_show_vdisk0.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /c1/v0 show all J nolog').and_return(File.read('spec/fixtures/3108/storcli_call_show_vdisk0.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /c1/v234 show all J nolog').and_return(File.read('spec/fixtures/3108/storcli_call_show_vdisk234.json'))
     end
 
     it do
@@ -109,13 +109,59 @@ describe :megaraid, type: :fact do
     end
   end
 
+  context 'module present, storcli present on MegaRAID 9560' do
+    before :each do
+      allow(Dir).to receive(:exist?).and_return(true)
+      allow(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/mpt3sas').and_return(true)
+      expect(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/megaraid_sas').and_return(true)
+
+      expect(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return('/example/path')
+      expect(Facter::Util::Resolution).not_to receive(:which).with('/opt/MegaRAID/storcli/storcli64')
+      expect(Facter::Util::Resolution).not_to receive(:which).with('storcli')
+      expect(Facter::Util::Resolution).not_to receive(:which).with('/opt/MegaRAID/storcli/storcli')
+
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show J nolog').and_return(File.read('spec/fixtures/9560/storcli_call_show.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show patrolread J nolog').and_return(File.read('spec/fixtures/9560/storcli_call_show_patrolread.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show cc J nolog').and_return(File.read('spec/fixtures/9560/storcli_call_show_cc.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /c0/v238 show all J nolog').and_return(File.read('spec/fixtures/9560/storcli_call_show_vdisk238.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /c0/v239 show all J nolog').and_return(File.read('spec/fixtures/9560/storcli_call_show_vdisk239.json'))
+    end
+
+    it do
+      expect(fact.value['present?']).to eq(true)
+      expect(fact.value['storcli']).to eq('/example/path')
+      expect(fact.value['number_of_controllers']).to eq(1)
+    end
+    it 'controllers structure' do
+      expect(fact.value['controllers'].count).to eq(1)
+
+      # key product_name
+      expect(fact.value.fetch('controllers')['0']['product_name']).to eq('MegaRAID 9560-8i 4GB')
+
+      # key patrol_read/PR Next Start time
+      expect(fact.value.fetch('controllers')['0']['patrol_read']['PR Next Start time']).to eq('Saturday at 03:00:00')
+
+      # key consistency_check/CC Next Starttime
+      expect(fact.value.fetch('controllers')['0']['consistency_check']['CC Next Starttime']).to eq('Saturday at 03:00:00')
+
+      # virtual drives
+      expect(fact.value.fetch('controllers')['0']['virtual_drives']).to eq(
+             '238' => { 'Encryption' => 'None', 'IO Policy' => 'direct', 'Name' => '', 'Physical Drive Cache' => 'default',
+                        'Read Cache' => 'ra', 'State' => 'Optl', 'Strip Size' => '256 KB', 'Type' => 'RAID10',
+                        'Write Cache' => 'wb' },
+             '239' => { 'Encryption' => 'None', 'IO Policy' => 'direct', 'Name' => '', 'Physical Drive Cache' => 'default',
+                        'Read Cache' => 'ra', 'State' => 'Optl', 'Strip Size' => '256 KB', 'Type' => 'RAID1', 'Write Cache' => 'wb' },
+           )
+    end
+  end
+
   context 'module present, storcli present, card unsupported' do
     before :each do
       allow(Dir).to receive(:exist?).and_return(true)
       allow(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/mpt3sas').and_return(true)
       expect(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/megaraid_sas').and_return(true)
 
-      expect(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return('/example/path').twice
+      expect(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return('/example/path')
       expect(Facter::Util::Resolution).not_to receive(:which).with('/opt/MegaRAID/storcli/storcli64')
       expect(Facter::Util::Resolution).not_to receive(:which).with('storcli')
       expect(Facter::Util::Resolution).not_to receive(:which).with('/opt/MegaRAID/storcli/storcli')

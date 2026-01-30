@@ -225,13 +225,18 @@ class Megaraid
 
         cache = item['Cache'].to_s.upcase
 
-        vd[vd_id]['Write Cache'] =
-          case cache
-          when %r{AWB}      then 'awb'
-          when %r{\bWB\b}   then 'wb'
-          when %r{\bWT\b}   then 'wt'
-          else 'unknown'
+        write_cache =
+          if cache.include?('AWB')
+            'awb'
+          elsif cache.include?('WB')
+            'wb'
+          elsif cache.include?('WT')
+            'wt'
+          else
+            'unknown'
           end
+
+        vd[vd_id]['Write Cache'] = write_cache
 
         if cache.start_with?('R')
           vd[vd_id]['Read Cache'] = 'ra'
