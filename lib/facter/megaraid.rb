@@ -17,20 +17,30 @@ class Megaraid
 
   # where's storcli application
   def storcli
+    return @storcli if defined?(@storcli)
     @storcli = nil
     return unless present?
-    manufacturer = Facter.value(:dmi)['manufacturer']
-    storcli_locations = if manufacturer.include? 'Dell'
-                          ['perccli64', '/opt/MegaRAID/perccli/perccli64', 'perccli', '/opt/MegaRAID/perccli/perccli']
-                        else
-                          ['storcli64', '/opt/MegaRAID/storcli/storcli64', 'storcli', '/opt/MegaRAID/storcli/storcli']
-                        end
+
+    dmi = Facter.value(:dmi)
+    manufacturer = dmi.is_a?(Hash) ? dmi['manufacturer'] : nil
+    is_dell = manufacturer.is_a?(String) && manufacturer.include?('Dell')
+
+    storcli_locations =
+      if is_dell
+        ['perccli64', '/opt/MegaRAID/perccli/perccli64',
+         'perccli',   '/opt/MegaRAID/perccli/perccli']
+      else
+        ['storcli64', '/opt/MegaRAID/storcli/storcli64',
+         'storcli',   '/opt/MegaRAID/storcli/storcli']
+      end
 
     storcli_locations.each do |run|
-      @storcli = Facter::Util::Resolution.which(run)
-      next if @storcli.nil?
+      path = Facter::Util::Resolution.which(run)
+      next unless path
+      @storcli = path
       break
     end
+
     @storcli
   end
 
@@ -47,12 +57,24 @@ class Megaraid
   def controller_info
     @controller_info = {}
     return unless present?
-    return unless @storcli
-    output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /call show J nolog"))
-    output.fetch('Controllers').each do |controller|
-      if controller.dig('Command Status', 'Status') != 'Failure'
-        @controller_info[controller.dig('Command Status', 'Controller')] = controller.fetch('Response Data', {})
-      end
+    return unless storcli
+
+    raw = Facter::Util::Resolution.exec("#{storcli} /call show J nolog")
+    return unless raw && !raw.empty?
+
+    output = begin
+               JSON.parse(raw)
+             rescue
+               nil
+             end
+    return unless output.is_a?(Hash)
+
+    output.fetch('Controllers', []).each do |controller|
+      next if controller.dig('Command Status', 'Status') == 'Failure'
+      id = controller.dig('Command Status', 'Controller')
+      next if id.nil?
+
+      @controller_info[id] = controller.fetch('Response Data', {})
     end
   end
 
@@ -60,37 +82,53 @@ class Megaraid
   def pr_info
     @pr_info = {}
     return unless present?
-    return unless @storcli
-    return unless num_controllers > 0
-    output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /call show patrolread J nolog"))
-    # this command will return the properties in pairs, transforming into key/value
-    output.fetch('Controllers').each do |controller|
+    return unless storcli
+    return unless num_controllers.positive?
+
+    raw = Facter::Util::Resolution.exec("#{storcli} /call show patrolread J nolog")
+    return unless raw && !raw.empty?
+
+    output = begin
+               JSON.parse(raw)
+             rescue
+               nil
+             end
+    return unless output.is_a?(Hash)
+
+    output.fetch('Controllers', []).each do |controller|
       pr_properties = {}
       controller_properties = controller.dig('Response Data', 'Controller Properties') || {}
+
       if controller_properties.empty?
         pr_properties['PR Mode'] = 'Un-supported'
         pr_properties['PR Next Start time'] = 'Un-supported'
       else
         controller_properties.each do |attribute|
-          # Let's parse some attributes
-          case attribute['Ctrl_Prop']
-          when 'PR Execution Delay', 'PR iterations completed', 'PR MaxConcurrentPd'
-            pr_properties[attribute['Ctrl_Prop']] = attribute['Value'].to_i
+          key = attribute['Ctrl_Prop']
+          val = attribute['Value']
+
+          case key
+          when 'PR Execution Delay',
+                 'PR iterations completed',
+                 'PR MaxConcurrentPd'
+            pr_properties[key] = val.to_i
           when 'PR on SSD'
-            pr_properties[attribute['Ctrl_Prop']] = if attribute['Value'] == 'Disabled'
-                                                      false
-                                                    else
-                                                      true
-                                                    end
+            pr_properties[key] = (val != 'Disabled')
           when 'PR Next Start time'
-            next_start_time = Time.strptime(attribute['Value'], '%m/%d/%Y, %H:%M:%S')
-            pr_properties[attribute['Ctrl_Prop']] = next_start_time.strftime('%A at %H:%M:%S')
+            begin
+              t = Time.strptime(val, '%m/%d/%Y, %H:%M:%S')
+              pr_properties[key] = t.strftime('%A at %H:%M:%S')
+            rescue
+              pr_properties[key] = val
+            end
           else
-            pr_properties[attribute['Ctrl_Prop']] = attribute['Value']
+            pr_properties[key] = val
           end
         end
       end
-      @pr_info[controller.dig('Command Status', 'Controller')] = pr_properties
+
+      id = controller.dig('Command Status', 'Controller')
+      @pr_info[id] = pr_properties if id
     end
   end
 
@@ -98,31 +136,52 @@ class Megaraid
   def cc_info
     @cc_info = {}
     return unless present?
-    return unless @storcli
-    return unless num_controllers > 0
-    output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /call show cc J nolog"))
-    # this command will return the properties in pairs, transforming into key/value
-    output.fetch('Controllers').each do |controller|
+    return unless storcli
+    return unless num_controllers.positive?
+
+    raw = Facter::Util::Resolution.exec("#{storcli} /call show cc J nolog")
+    return unless raw && !raw.empty?
+
+    output = begin
+               JSON.parse(raw)
+             rescue
+               nil
+             end
+    return unless output.is_a?(Hash)
+
+    output.fetch('Controllers', []).each do |controller|
       cc_properties = {}
-      controller_properties = controller.dig('Response Data', 'Controller Properties') || {}
+      controller_properties =
+        controller.dig('Response Data', 'Controller Properties') || {}
+
       if controller_properties.empty?
         cc_properties['CC Operation Mode'] = 'Un-supported'
         cc_properties['CC Next Starttime'] = 'Un-supported'
       else
         controller_properties.each do |attribute|
-          # Let's parse some attributes
-          case attribute['Ctrl_Prop']
-          when 'CC Execution Delay', 'CC Number of iterations', 'CC Number of VD completed'
-            cc_properties[attribute['Ctrl_Prop']] = attribute['Value'].to_i
+          key = attribute['Ctrl_Prop']
+          val = attribute['Value']
+
+          case key
+          when 'CC Execution Delay',
+                 'CC Number of iterations',
+                 'CC Number of VD completed'
+            cc_properties[key] = val.to_i
           when 'CC Next Starttime'
-            next_start_time = Time.strptime(attribute['Value'], '%m/%d/%Y, %H:%M:%S')
-            cc_properties[attribute['Ctrl_Prop']] = next_start_time.strftime('%A at %H:%M:%S')
+            begin
+              t = Time.strptime(val, '%m/%d/%Y, %H:%M:%S')
+              cc_properties[key] = t.strftime('%A at %H:%M:%S')
+            rescue
+              cc_properties[key] = val
+            end
           else
-            cc_properties[attribute['Ctrl_Prop']] = attribute['Value']
+            cc_properties[key] = val
           end
         end
       end
-      @cc_info[controller.dig('Command Status', 'Controller')] = cc_properties
+
+      id = controller.dig('Command Status', 'Controller')
+      @cc_info[id] = cc_properties if id
     end
   end
 
@@ -134,77 +193,92 @@ class Megaraid
   # Parse and returns controllers information
   def controllers_info
     ctrls = {}
+
     @controller_info.each do |controller, parameters|
       vd = {}
+
       parameters.fetch('VD LIST', []).each do |item|
         next unless item.key?('DG/VD')
+
         vd_id = item['DG/VD'].split('/')[1]
         vd[vd_id] = {}
 
-        vd_output = JSON.parse(Facter::Util::Resolution.exec("#{@storcli} /c#{controller}/v#{vd_id} show all J nolog")).fetch('Controllers')[0].dig('Response Data', "VD#{vd_id} Properties")
-        vd[vd_id]['Type'] = item.fetch('TYPE')
-        vd[vd_id]['State'] = item.fetch('State')
-        vd[vd_id]['Strip Size'] = vd_output.fetch('Strip Size')
+        raw = Facter::Util::Resolution.exec(
+          "#{storcli} /c#{controller}/v#{vd_id} show all J nolog",
+        )
+        next unless raw && !raw.empty?
 
-        if item['Cache'].include?('AWB')
-          vd[vd_id]['Write Cache'] = 'awb'
-        elsif item['Cache'].include?('WB')
-          vd[vd_id]['Write Cache'] = 'wb'
-        elsif item['Cache'].include?('WT')
-          vd[vd_id]['Write Cache'] = 'wt'
-        end
+        vd_json = begin
+                    JSON.parse(raw)
+                  rescue
+                    nil
+                  end
+        next unless vd_json
 
-        if item['Cache'].start_with?('R')
+        vd_output =
+          vd_json.fetch('Controllers', [])[0]
+                 &.dig('Response Data', "VD#{vd_id} Properties") || {}
+
+        vd[vd_id]['Type']       = item.fetch('TYPE', nil)
+        vd[vd_id]['State']      = item.fetch('State', nil)
+        vd[vd_id]['Strip Size'] = vd_output.fetch('Strip Size', nil)
+
+        cache = item['Cache'].to_s.upcase
+
+        vd[vd_id]['Write Cache'] =
+          case cache
+          when %r{AWB}      then 'awb'
+          when %r{\bWB\b}   then 'wb'
+          when %r{\bWT\b}   then 'wt'
+          else 'unknown'
+          end
+
+        if cache.start_with?('R')
           vd[vd_id]['Read Cache'] = 'ra'
-        elsif item['Cache'].start_with?('NR')
+        elsif cache.start_with?('NR')
           vd[vd_id]['Read Cache'] = 'nora'
         end
 
-        if item['Cache'].end_with?('D')
+        if cache.end_with?('D')
           vd[vd_id]['IO Policy'] = 'direct'
-        elsif item['Cache'].end_with?('C')
+        elsif cache.end_with?('C')
           vd[vd_id]['IO Policy'] = 'cached'
         end
 
-        vd[vd_id]['Physical Drive Cache'] = vd_output.fetch('Disk Cache Policy', '')
-        if vd[vd_id]['Physical Drive Cache'] == 'Disk\'s Default'
-          vd[vd_id]['Physical Drive Cache'] = 'default'
-        elsif vd[vd_id]['Physical Drive Cache'] == 'Enabled'
-          vd[vd_id]['Physical Drive Cache'] = 'on'
-        elsif vd[vd_id]['Physical Drive Cache'] == 'Disabled'
-          vd[vd_id]['Physical Drive Cache'] = 'off'
-        end
+        pdc = vd_output.fetch('Disk Cache Policy', 'unknown')
+        vd[vd_id]['Physical Drive Cache'] =
+          case pdc
+          when "Disk's Default" then 'default'
+          when 'Enabled'        then 'on'
+          when 'Disabled'       then 'off'
+          else pdc
+          end
 
-        vd[vd_id]['Name'] = item.fetch('Name', '')
-        vd[vd_id]['Encryption'] = vd_output.fetch('Encryption', '')
+        vd[vd_id]['Name']       = item.fetch('Name', nil)
+        vd[vd_id]['Encryption'] = vd_output.fetch('Encryption', nil)
       end
 
       ctrls[controller] = {
-        # Basics
-        'product_name'  => parameters.fetch('Product Name'),
-        'serial_number' => parameters.fetch('Serial Number'),
+        'product_name'  => parameters.fetch('Product Name', nil),
+        'serial_number' => parameters.fetch('Serial Number', nil),
 
-        # Version
-        'fw_package_build' => parameters.fetch('FW Package Build'),
-        'fw_version'       => parameters.fetch('FW Version'),
-        'bios_version'     => parameters.fetch('BIOS Version'),
+        'fw_package_build' => parameters.fetch('FW Package Build', nil),
+        'fw_version'       => parameters.fetch('FW Version', nil),
+        'bios_version'     => parameters.fetch('BIOS Version', nil),
 
-        # virtual drives
         'virtual_drives'   => vd,
-
-        # Patrol Read
-        'patrol_read' => @pr_info[controller],
-
-        # Consistency Check
+        'patrol_read'      => @pr_info[controller],
         'consistency_check' => @cc_info[controller],
       }
     end
+
     ctrls
   end
 
   def all_facts
     storcli
     all_info
+
     {
       'present?'              => present?,
       'storcli'               => storcli,
@@ -218,7 +292,6 @@ Facter.add(:megaraid) do
   confine kernel: 'Linux'
 
   setcode do
-    megaraid = Megaraid.new
-    megaraid.all_facts
+    Megaraid.new.all_facts
   end
 end
