@@ -1,0 +1,113 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3205.0000.0000 Oct 09, 2024",
+		"Operating system" : "Linux 5.14.0-570.39.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"/c0/v0" : [
+			{
+				"DG/VD" : "0/0",
+				"TYPE" : "RAID10",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "RWBD",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "3.637 TB",
+				"Name" : ""
+			}
+		],
+		"PDs for VD 0" : [
+			{
+				"EID:Slt" : "134:0",
+				"DID" : 1,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "1.818 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST2000DM008-2UB102",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "134:1",
+				"DID" : 0,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "1.818 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST2000DM008-2UB102",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "134:2",
+				"DID" : 2,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "1.818 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST2000DM008-2UB102",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "134:3",
+				"DID" : 3,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "1.818 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST2000DM008-2UB102",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"VD0 Properties" : {
+			"Strip Size" : "256 KB",
+			"Number of Blocks" : 7811891200,
+			"VD has Emulated PD" : "Yes",
+			"Span Depth" : 2,
+			"Number of Drives Per Span" : 2,
+			"Write Cache(initial setting)" : "WriteBack",
+			"Disk Cache Policy" : "Disk's Default",
+			"Encryption" : "None",
+			"Data Protection" : "None",
+			"Active Operations" : "None",
+			"Exposed to OS" : "Yes",
+			"OS Drive Name" : "/dev/sda",
+			"Creation Date" : "27-11-2023",
+			"Creation Time" : "11:06:31 AM",
+			"Emulation type" : "default",
+			"Cachebypass size" : "Cachebypass-64k",
+			"Cachebypass Mode" : "Cachebypass Intelligent",
+			"Is LD Ready for OS Requests" : "Yes",
+			"SCSI NAA Id" : "600062b216c813802cf734b71a1355b3",
+			"Unmap Enabled" : "No"
+		}
+	}
+}
+]
+}

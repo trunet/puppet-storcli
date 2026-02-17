@@ -1,0 +1,80 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-611.24.1.el9_7.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"/c0/v0" : [
+			{
+				"DG/VD" : "0/0",
+				"TYPE" : "RAID1",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "RAWBC",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "232.830 GB",
+				"Name" : ""
+			}
+		],
+		"PDs for VD 0" : [
+			{
+				"EID:Slt" : "252:1",
+				"DID" : 12,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "232.830 GB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD2503ABYX-01WERA1",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:0",
+				"DID" : 13,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "232.830 GB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD2502ABYS-02B7A0",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"VD0 Properties" : {
+			"Strip Size" : "64 KB",
+			"Number of Blocks" : 488280064,
+			"Span Depth" : 1,
+			"Number of Drives Per Span" : 2,
+			"Write Cache(initial setting)" : "WriteBack",
+			"Disk Cache Policy" : "Enabled",
+			"Encryption" : "None",
+			"Data Protection" : "None",
+			"Active Operations" : "None",
+			"Exposed to OS" : "Yes",
+			"OS Drive Name" : "/dev/sda",
+			"Creation Date" : "19-11-2013",
+			"Creation Time" : "12:12:08 PM",
+			"Emulation type" : "default",
+			"Is LD Ready for OS Requests" : "Yes",
+			"SCSI NAA Id" : "600605b0018206d01a1e1218140d68af",
+			"Unmap Enabled" : "N/A"
+		}
+	}
+}
+]
+}

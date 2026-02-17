@@ -1,0 +1,46 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.2616.0000.0000 Dec 06, 2023",
+		"Operating system" : "Linux 6.1.113-1.el9.elrepo.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Controller Properties" : [
+			{
+				"Ctrl_Prop" : "CC Operation Mode",
+				"Value" : "Concurrent"
+			},
+			{
+				"Ctrl_Prop" : "CC Execution Delay",
+				"Value" : "672 hours"
+			},
+			{
+				"Ctrl_Prop" : "CC Next Starttime",
+				"Value" : "02/21/2026, 03:00:00"
+			},
+			{
+				"Ctrl_Prop" : "CC Current State",
+				"Value" : "Stopped"
+			},
+			{
+				"Ctrl_Prop" : "CC Number of iterations",
+				"Value" : "0"
+			},
+			{
+				"Ctrl_Prop" : "CC Number of VD completed",
+				"Value" : "0"
+			},
+			{
+				"Ctrl_Prop" : "CC Excluded VDs",
+				"Value" : "None"
+			}
+		]
+	}
+}
+]
+}
+

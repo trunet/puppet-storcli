@@ -1,0 +1,81 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-570.19.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"/c0/v0" : [
+			{
+				"DG/VD" : "0/0",
+				"TYPE" : "RAID1",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "NRWTD",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "893.750 GB",
+				"Name" : ""
+			}
+		],
+		"PDs for VD 0" : [
+			{
+				"EID:Slt" : "13:0",
+				"DID" : 4,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "893.750 GB",
+				"Intf" : "SATA",
+				"Med" : "SSD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "Micron_5400_MTFDDAV960TGA",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "13:4",
+				"DID" : 5,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "893.750 GB",
+				"Intf" : "SATA",
+				"Med" : "SSD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "Micron_5400_MTFDDAV960TGA",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"VD0 Properties" : {
+			"Strip Size" : "64 KB",
+			"Number of Blocks" : 1874329600,
+			"VD has Emulated PD" : "Yes",
+			"Span Depth" : 1,
+			"Number of Drives Per Span" : 2,
+			"Write Cache(initial setting)" : "WriteThrough",
+			"Disk Cache Policy" : "Disk's Default",
+			"Encryption" : "None",
+			"Data Protection" : "None",
+			"Active Operations" : "None",
+			"Exposed to OS" : "Yes",
+			"OS Drive Name" : "/dev/sda",
+			"Creation Date" : "09-09-2025",
+			"Creation Time" : "12:14:25 PM",
+			"Emulation type" : "default",
+			"Is LD Ready for OS Requests" : "Yes",
+			"SCSI NAA Id" : "6003048020844ca63052d6a1ad14dd83",
+			"Unmap Enabled" : "No"
+		}
+	}
+}
+]
+}

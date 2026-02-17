@@ -1,0 +1,175 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-570.19.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Product Name" : "SAS 3808",
+		"Serial Number" : "HA253S001796",
+		"SAS Address" : " 5003048020844ca6",
+		"PCI Address" : "00:e1:00:00",
+		"System Time" : "02/17/2026 16:06:20",
+		"Mfg. Date" : "03/20/25",
+		"Controller Time" : "02/17/2026 22:06:14",
+		"FW Package Build" : "52.28.0-5308",
+		"BIOS Version" : "7.28.00.0_0x071C0000",
+		"FW Version" : "5.280.01-3972",
+		"Driver Name" : "megaraid_sas",
+		"Driver Version" : "07.727.03.00-rc1",
+		"Current Personality" : "RAID-Mode ",
+		"Vendor Id" : 4096,
+		"Device Id" : 4326,
+		"SubVendor Id" : 5593,
+		"SubDevice Id" : 7278,
+		"Host Interface" : "PCI-E",
+		"Device Interface" : "SAS-12G",
+		"Bus Number" : 225,
+		"Device Number" : 0,
+		"Function Number" : 0,
+		"Domain ID" : 0,
+		"Security Protocol" : "None",
+		"Drive Groups" : 1,
+		"TOPOLOGY" : [
+			{
+				"DG" : 0,
+				"Arr" : "-",
+				"Row" : "-",
+				"EID:Slot" : "-",
+				"DID" : "-",
+				"Type" : "RAID1",
+				"State" : "Optl",
+				"BT" : "N",
+				"Size" : "893.750 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "N",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : "-",
+				"EID:Slot" : "-",
+				"DID" : "-",
+				"Type" : "RAID1",
+				"State" : "Optl",
+				"BT" : "N",
+				"Size" : "893.750 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "N",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : 0,
+				"EID:Slot" : "13:0",
+				"DID" : 4,
+				"Type" : "DRIVE",
+				"State" : "Onln",
+				"BT" : "N",
+				"Size" : "893.750 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "-",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : 1,
+				"EID:Slot" : "13:4",
+				"DID" : 5,
+				"Type" : "DRIVE",
+				"State" : "Onln",
+				"BT" : "N",
+				"Size" : "893.750 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "-",
+				"TR" : "N"
+			}
+		],
+		"Virtual Drives" : 1,
+		"VD LIST" : [
+			{
+				"DG/VD" : "0/0",
+				"TYPE" : "RAID1",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "NRWTD",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "893.750 GB",
+				"Name" : ""
+			}
+		],
+		"Physical Drives" : 2,
+		"PD LIST" : [
+			{
+				"EID:Slt" : "13:0",
+				"DID" : 4,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "893.750 GB",
+				"Intf" : "SATA",
+				"Med" : "SSD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "Micron_5400_MTFDDAV960TGA",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "13:4",
+				"DID" : 5,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "893.750 GB",
+				"Intf" : "SATA",
+				"Med" : "SSD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "Micron_5400_MTFDDAV960TGA",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"Enclosures" : 1,
+		"Enclosure LIST" : [
+			{
+				"EID" : 13,
+				"State" : "OK",
+				"Slots" : 8,
+				"PD" : 2,
+				"PS" : 0,
+				"Fans" : 0,
+				"TSs" : 0,
+				"Alms" : 0,
+				"SIM" : 0,
+				"Port#" : "-",
+				"ProdID" : "VirtualSES",
+				"VendorSpecific" : " "
+			}
+		]
+	}
+}
+]
+}

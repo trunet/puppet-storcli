@@ -1,0 +1,282 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-570.19.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Product Name" : "SAS 3408",
+		"Serial Number" : "HA237S008623",
+		"SAS Address" : " 5003048020826577",
+		"PCI Address" : "00:41:00:00",
+		"System Time" : "02/17/2026 16:06:20",
+		"Mfg. Date" : "07/24/23",
+		"Controller Time" : "02/17/2026 22:04:33",
+		"FW Package Build" : "51.17.0-4052",
+		"BIOS Version" : "7.17.00.0_0x07110200",
+		"FW Version" : "5.170.01-3513",
+		"Driver Name" : "megaraid_sas",
+		"Driver Version" : "07.727.03.00-rc1",
+		"Current Personality" : "RAID-Mode ",
+		"Vendor Id" : 4096,
+		"Device Id" : 23,
+		"SubVendor Id" : 5593,
+		"SubDevice Id" : 7011,
+		"Host Interface" : "PCI-E",
+		"Device Interface" : "SAS-12G",
+		"Bus Number" : 65,
+		"Device Number" : 0,
+		"Function Number" : 0,
+		"Domain ID" : 0,
+		"Security Protocol" : "None",
+		"Drive Groups" : 1,
+		"TOPOLOGY" : [
+			{
+				"DG" : 0,
+				"Arr" : "-",
+				"Row" : "-",
+				"EID:Slot" : "-",
+				"DID" : "-",
+				"Type" : "RAID1",
+				"State" : "Optl",
+				"BT" : "N",
+				"Size" : "223.062 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "N",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : "-",
+				"EID:Slot" : "-",
+				"DID" : "-",
+				"Type" : "RAID1",
+				"State" : "Optl",
+				"BT" : "N",
+				"Size" : "223.062 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "N",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : 0,
+				"EID:Slot" : "16:0",
+				"DID" : 4,
+				"Type" : "DRIVE",
+				"State" : "Onln",
+				"BT" : "N",
+				"Size" : "223.062 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "-",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : 1,
+				"EID:Slot" : "16:4",
+				"DID" : 5,
+				"Type" : "DRIVE",
+				"State" : "Onln",
+				"BT" : "N",
+				"Size" : "223.062 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "-",
+				"TR" : "N"
+			}
+		],
+		"Virtual Drives" : 1,
+		"VD LIST" : [
+			{
+				"DG/VD" : "0/0",
+				"TYPE" : "RAID1",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "NRWTD",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "223.062 GB",
+				"Name" : ""
+			}
+		],
+		"Physical Drives" : 2,
+		"PD LIST" : [
+			{
+				"EID:Slt" : "16:0",
+				"DID" : 4,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "223.062 GB",
+				"Intf" : "SATA",
+				"Med" : "SSD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "INTEL SSDSCKKB240GZ",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "16:4",
+				"DID" : 5,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "223.062 GB",
+				"Intf" : "SATA",
+				"Med" : "SSD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "INTEL SSDSCKKB240GZ",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"Enclosures" : 1,
+		"Enclosure LIST" : [
+			{
+				"EID" : 16,
+				"State" : "OK",
+				"Slots" : 8,
+				"PD" : 2,
+				"PS" : 0,
+				"Fans" : 0,
+				"TSs" : 0,
+				"Alms" : 0,
+				"SIM" : 0,
+				"Port#" : "-",
+				"ProdID" : "VirtualSES",
+				"VendorSpecific" : " "
+			}
+		]
+	}
+},
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-570.19.1.el9_6.x86_64",
+		"Controller" : 1,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Product Name" : "LSI3008-IR",
+		"Serial Number" : "50030480248cfdf1",
+		"SAS Address" : " 50030480248cfdf1",
+		"PCI Address" : "00:01:00:00",
+		"System Time" : "02/17/2026 16:06:20",
+		"FW Package Build" : "00.00.00.00",
+		"FW Version" : "16.00.10.00",
+		"BIOS Version" : "08.37.00.00_18.00.00.00",
+		"NVDATA Version" : "14.01.49.39",
+		"Driver Name" : "mpt3sas",
+		"Driver Version" : "48.100.00.00",
+		"Bus Number" : 1,
+		"Device Number" : 0,
+		"Function Number" : 0,
+		"Domain ID" : 0,
+		"Vendor Id" : 4096,
+		"Device Id" : 151,
+		"SubVendor Id" : 5593,
+		"SubDevice Id" : 2056,
+		"Board Name" : "LSI3008-IR",
+		"Board Assembly" : "N/A",
+		"Board Tracer Number" : "N/A",
+		"Security Protocol" : "None",
+		"Physical Drives" : 4,
+		"PD LIST" : [
+			{
+				"EID:Slt" : " :0",
+				"DID" : 0,
+				"State" : "Online",
+				"DG" : "-",
+				"Size" : "9.094 TB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "-",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST10000NM018B   ",
+				"Sp" : "-"
+			},
+			{
+				"EID:Slt" : " :1",
+				"DID" : 1,
+				"State" : "Online",
+				"DG" : "-",
+				"Size" : "9.094 TB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "-",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST10000NM018B   ",
+				"Sp" : "-"
+			},
+			{
+				"EID:Slt" : " :2",
+				"DID" : 2,
+				"State" : "Online",
+				"DG" : "-",
+				"Size" : "9.094 TB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "-",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST10000NM018B   ",
+				"Sp" : "-"
+			},
+			{
+				"EID:Slt" : " :3",
+				"DID" : 3,
+				"State" : "Online",
+				"DG" : "-",
+				"Size" : "9.094 TB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "-",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST10000NM018B   ",
+				"Sp" : "-"
+			}
+		],
+		"Requested Boot Drive" : "Not Set",
+		"Virtual Drives" : 1,
+		"VD LIST" : [
+			{
+				"VD" : "0",
+				"TYPE" : "RAID10",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "No",
+				"Cache" : "NRWTD",
+				"Size" : "18.189 TB",
+				"Name" : ""
+			}
+		]
+	}
+}
+]
+}

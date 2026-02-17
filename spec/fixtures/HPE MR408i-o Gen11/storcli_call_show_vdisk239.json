@@ -1,0 +1,84 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-570.19.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"/c0/v239" : [
+			{
+				"DG/VD" : "0/239",
+				"TYPE" : "RAID1",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "RWBD",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "278.875 GiB",
+				"Name" : "OS"
+			}
+		],
+		"PDs for VD 239" : [
+			{
+				"EID:Slt" : "252:1",
+				"DID" : 0,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "300.00 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "EG000300JWSJP   ",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:2",
+				"DID" : 1,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "300.00 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "EG000300JWSJP   ",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"VD239 Properties" : {
+			"Strip Size" : "256 KB",
+			"Number of Blocks" : 584843264,
+			"VD has Emulated Drive" : "No",
+			"Span Depth" : 1,
+			"Number of Drives Per Span" : 2,
+			"Write Cache(initial setting)" : "WriteBack",
+			"Disk Cache Policy" : "Disk's Default",
+			"Write Cache Status" : "Enabled",
+			"Encryption" : "None",
+			"Data Integrity" : "None",
+			"Active Operations" : "None",
+			"Exposed to OS" : "Yes",
+			"OS Drive Name" : "/dev/sda",
+			"Creation Date" : "07-11-2025",
+			"Creation Time" : "10:48:07 PM",
+			"Emulation type" : "default",
+			"Cachebypass size" : "Cachebypass-64k",
+			"Cachebypass Mode" : "Cachebypass Intelligent",
+			"Is LD Ready for OS Requests" : "Yes",
+			"SCSI NAA Id" : "600062b221ebdd4030a133a782413c1f",
+			"Unmap Enabled" : "No"
+		}
+	}
+}
+]
+}

@@ -1,0 +1,45 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3205.0000.0000 Oct 09, 2024",
+		"Operating system" : "Linux 5.14.0-570.39.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Controller Properties" : [
+			{
+				"Ctrl_Prop" : "CC Operation Mode",
+				"Value" : "Concurrent"
+			},
+			{
+				"Ctrl_Prop" : "CC Execution Delay",
+				"Value" : "672 hours"
+			},
+			{
+				"Ctrl_Prop" : "CC Next Starttime",
+				"Value" : "03/13/2026, 15:00:00"
+			},
+			{
+				"Ctrl_Prop" : "CC Current State",
+				"Value" : "Stopped"
+			},
+			{
+				"Ctrl_Prop" : "CC Number of iterations",
+				"Value" : "28"
+			},
+			{
+				"Ctrl_Prop" : "CC Number of VD completed",
+				"Value" : "1"
+			},
+			{
+				"Ctrl_Prop" : "CC Excluded VDs",
+				"Value" : "None"
+			}
+		]
+	}
+}
+]
+}

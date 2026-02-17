@@ -1,0 +1,111 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3205.0000.0000 Oct 09, 2024",
+		"Operating system" : "Linux 5.14.0-570.39.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"/c0/v0" : [
+			{
+				"DG/VD" : "0/0",
+				"TYPE" : "RAID10",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "NRWTD",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "7.276 TB",
+				"Name" : ""
+			}
+		],
+		"PDs for VD 0" : [
+			{
+				"EID:Slt" : "69:1",
+				"DID" : 1,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "3.638 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD4005FFBX-68CAUN0",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "69:2",
+				"DID" : 3,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "3.638 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD4005FFBX-68CAUN0",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "69:3",
+				"DID" : 2,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "3.638 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD4005FFBX-68CAUN0",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "69:4",
+				"DID" : 4,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "3.638 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD4005FFBX-68CAUN0",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"VD0 Properties" : {
+			"Strip Size" : "64 KB",
+			"Number of Blocks" : 15625879552,
+			"VD has Emulated PD" : "Yes",
+			"Span Depth" : 2,
+			"Number of Drives Per Span" : 2,
+			"Write Cache(initial setting)" : "WriteThrough",
+			"Disk Cache Policy" : "Disk's Default",
+			"Encryption" : "None",
+			"Data Protection" : "None",
+			"Active Operations" : "None",
+			"Exposed to OS" : "Yes",
+			"OS Drive Name" : "/dev/sdb",
+			"Creation Date" : "25-07-2025",
+			"Creation Time" : "03:53:13 PM",
+			"Emulation type" : "default",
+			"Is LD Ready for OS Requests" : "Yes",
+			"SCSI NAA Id" : "600062b21f4c2180301664e9b08af325",
+			"Unmap Enabled" : "No"
+		}
+	}
+}
+]
+}

@@ -1,0 +1,174 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-570.19.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Product Name" : "HPE MR408i-o Gen11",
+		"Serial Number" : "PXSFQ0CBIKN6DZ",
+		"PCI Slot Number" : 14,
+		"SAS Address" : " 500062b221ebdd40",
+		"PCI Address" : "00:6d:00:00",
+		"System Time" : "02/17/2026 16:06:20",
+		"Mfg. Date" : "02/22/25",
+		"Controller Time" : "02/17/2026 22:05:54",
+		"FW Package Build" : "52.32.3-6118",
+		"BIOS Version" : "7.32.00.0_0x07200000",
+		"FW Version" : "5.320.03-4159",
+		"Driver Name" : "megaraid_sas",
+		"Driver Version" : "07.727.03.00-rc1",
+		"Current Personality" : "RAID-Mode ",
+		"Vendor Id" : 4096,
+		"Device Id" : 4322,
+		"SubVendor Id" : 5520,
+		"SubDevice Id" : 968,
+		"Host Interface" : "PCI-E",
+		"Device Interface" : "SAS-12G",
+		"Bus Number" : 109,
+		"Device Number" : 0,
+		"Function Number" : 0,
+		"Domain ID" : 0,
+		"Security Protocol" : "SPDM-1.00.00",
+		"Arrays" : 1,
+		"TOPOLOGY" : [
+			{
+				"DG" : 0,
+				"Arr" : "-",
+				"Row" : "-",
+				"EID:Slot" : "-",
+				"DID" : "-",
+				"Type" : "RAID1",
+				"State" : "Optl",
+				"BT" : "N",
+				"Size" : "278.875 GiB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "none",
+				"FSpace" : "N",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : "-",
+				"EID:Slot" : "-",
+				"DID" : "-",
+				"Type" : "RAID1",
+				"State" : "Optl",
+				"BT" : "N",
+				"Size" : "278.875 GiB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "none",
+				"FSpace" : "N",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : 0,
+				"EID:Slot" : "252:1",
+				"DID" : 0,
+				"Type" : "DRIVE",
+				"State" : "Onln",
+				"BT" : "N",
+				"Size" : "300.00 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "none",
+				"FSpace" : "-",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : 1,
+				"EID:Slot" : "252:2",
+				"DID" : 1,
+				"Type" : "DRIVE",
+				"State" : "Onln",
+				"BT" : "N",
+				"Size" : "300.00 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "none",
+				"FSpace" : "-",
+				"TR" : "N"
+			}
+		],
+		"Virtual Drives" : 1,
+		"VD LIST" : [
+			{
+				"DG/VD" : "0/239",
+				"TYPE" : "RAID1",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "RWBD",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "278.875 GiB",
+				"Name" : "OS"
+			}
+		],
+		"Physical Drives" : 2,
+		"Drive LIST" : [
+			{
+				"EID:Slt" : "252:1",
+				"DID" : 0,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "300.00 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "EG000300JWSJP   ",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:2",
+				"DID" : 1,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "300.00 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "EG000300JWSJP   ",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"Enclosures" : 1,
+		"Enclosure LIST" : [
+			{
+				"EID" : 252,
+				"State" : "OK",
+				"Slots" : 8,
+				"PD" : 2,
+				"PS" : 0,
+				"Fans" : 0,
+				"TSs" : 0,
+				"Alms" : 0,
+				"SIM" : 0,
+				"Port#" : "1I"
+			}
+		]
+	}
+}
+]
+}

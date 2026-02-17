@@ -1,0 +1,97 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-611.20.1.el9_7.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Product Name" : "GBT-CRA3338-IR",
+		"Serial Number" : "5001485000787dd0",
+		"SAS Address" : " 5001485000787dd0",
+		"PCI Address" : "00:01:00:00",
+		"System Time" : "02/17/2026 15:59:53",
+		"FW Package Build" : "00.00.00.00",
+		"FW Version" : "15.00.00.00",
+		"BIOS Version" : "08.35.00.00_17.00.00.00",
+		"NVDATA Version" : "14.00.00.09",
+		"Driver Name" : "mpt3sas",
+		"Driver Version" : "52.100.00.00",
+		"Bus Number" : 1,
+		"Device Number" : 0,
+		"Function Number" : 0,
+		"Domain ID" : 0,
+		"Vendor Id" : 4096,
+		"Device Id" : 151,
+		"SubVendor Id" : 5208,
+		"SubDevice Id" : 12296,
+		"Board Name" : "GBT-CRA3338-IR",
+		"Board Assembly" : "N/A",
+		"Board Tracer Number" : "N/A",
+		"Security Protocol" : "None",
+		"Physical Drives" : 3,
+		"PD LIST" : [
+			{
+				"EID:Slt" : " :0",
+				"DID" : 1,
+				"State" : "Online",
+				"DG" : "-",
+				"Size" : "893.137 GB",
+				"Intf" : "SATA",
+				"Med" : "SSD",
+				"SED" : "-",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "Micron_5400_MTFDDAK960TGA",
+				"Sp" : "-"
+			},
+			{
+				"EID:Slt" : " :1",
+				"DID" : 2,
+				"State" : "Online",
+				"DG" : "-",
+				"Size" : "893.137 GB",
+				"Intf" : "SATA",
+				"Med" : "SSD",
+				"SED" : "-",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "Micron_5400_MTFDDAK960TGA",
+				"Sp" : "-"
+			},
+			{
+				"EID:Slt" : " :2",
+				"DID" : 0,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "6.984 TB",
+				"Intf" : "SATA",
+				"Med" : "SSD",
+				"SED" : "-",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "Micron_5400_MTFDDAK7T6TGA",
+				"Sp" : "-"
+			}
+		],
+		"Requested Boot Drive" : "Not Set",
+		"Virtual Drives" : 1,
+		"VD LIST" : [
+			{
+				"VD" : "0",
+				"TYPE" : "RAID1",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "No",
+				"Cache" : "NRWTD",
+				"Size" : "893.137 GB",
+				"Name" : ""
+			}
+		]
+	}
+}
+]
+}

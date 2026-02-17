@@ -1,0 +1,200 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-611.24.1.el9_7.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Product Name" : "MegaRAID SAS 8708EM2",
+		"Serial Number" : "P554454309",
+		"SAS Address" : " 500605b0018206d0",
+		"PCI Address" : "00:06:00:00",
+		"System Time" : "02/17/2026 15:59:54",
+		"Mfg. Date" : "10/30/09",
+		"Controller Time" : "02/17/2026 21:59:31",
+		"FW Package Build" : "9.0.1-0034",
+		"FW Version" : "1.20.32-0512",
+		"BIOS Version" : "2.01.00",
+		"Driver Name" : "megaraid_sas",
+		"Driver Version" : "07.734.00.00-rc1",
+		"Vendor Id" : 4096,
+		"Device Id" : 96,
+		"SubVendor Id" : 4096,
+		"SubDevice Id" : 4115,
+		"Host Interface" : "PCI-E",
+		"Device Interface" : "SAS-3G",
+		"Bus Number" : 6,
+		"Device Number" : 0,
+		"Function Number" : 0,
+		"Domain ID" : 0,
+		"Security Protocol" : "None",
+		"Drive Groups" : 1,
+		"TOPOLOGY" : [
+			{
+				"DG" : 0,
+				"Arr" : "-",
+				"Row" : "-",
+				"EID:Slot" : "-",
+				"DID" : "-",
+				"Type" : "RAID1",
+				"State" : "Optl",
+				"BT" : "N",
+				"Size" : "232.830 GB",
+				"PDC" : "enbl",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "N",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : "-",
+				"EID:Slot" : "-",
+				"DID" : "-",
+				"Type" : "RAID1",
+				"State" : "Optl",
+				"BT" : "N",
+				"Size" : "232.830 GB",
+				"PDC" : "enbl",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "N",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : 0,
+				"EID:Slot" : "252:1",
+				"DID" : 12,
+				"Type" : "DRIVE",
+				"State" : "Onln",
+				"BT" : "N",
+				"Size" : "232.830 GB",
+				"PDC" : "enbl",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "-",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : 1,
+				"EID:Slot" : "252:0",
+				"DID" : 13,
+				"Type" : "DRIVE",
+				"State" : "Onln",
+				"BT" : "N",
+				"Size" : "232.830 GB",
+				"PDC" : "enbl",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "-",
+				"TR" : "N"
+			}
+		],
+		"Virtual Drives" : 1,
+		"VD LIST" : [
+			{
+				"DG/VD" : "0/0",
+				"TYPE" : "RAID1",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "RAWBC",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "232.830 GB",
+				"Name" : ""
+			}
+		],
+		"Physical Drives" : 3,
+		"PD LIST" : [
+			{
+				"EID:Slt" : "252:0",
+				"DID" : 13,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "232.830 GB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD2502ABYS-02B7A0",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:1",
+				"DID" : 12,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "232.830 GB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD2503ABYX-01WERA1",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:2",
+				"DID" : 14,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "1.818 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST32000644NS",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"Enclosures" : 1,
+		"Enclosure LIST" : [
+			{
+				"EID" : 252,
+				"State" : "OK",
+				"Slots" : 8,
+				"PD" : 3,
+				"PS" : 0,
+				"Fans" : 0,
+				"TSs" : 0,
+				"Alms" : 0,
+				"SIM" : 1,
+				"Port#" : "-",
+				"ProdID" : "SGPIO",
+				"VendorSpecific" : " "
+			}
+		],
+		"BBU_Info" : [
+			{
+				"Model" : "iBBU",
+				"State" : "Dgd (Needs Attention)",
+				"RetentionTime" : "0 hour(s)",
+				"Temp" : "21C",
+				"Mode" : "-",
+				"MfgDate" : "2010/02/05",
+				"Next Learn" : "None"
+			}
+		]
+	}
+}
+]
+}
