@@ -1,0 +1,49 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-570.19.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Controller Properties" : [
+			{
+				"Ctrl_Prop" : "PR Mode",
+				"Value" : "Auto"
+			},
+			{
+				"Ctrl_Prop" : "PR Execution Delay",
+				"Value" : "336 hours"
+			},
+			{
+				"Ctrl_Prop" : "PR iterations completed",
+				"Value" : "57"
+			},
+			{
+				"Ctrl_Prop" : "PR Next Start time",
+				"Value" : "02/21/2026, 02:00:00"
+			},
+			{
+				"Ctrl_Prop" : "PR on SSD",
+				"Value" : "Disabled"
+			},
+			{
+				"Ctrl_Prop" : "PR Current State",
+				"Value" : "Stopped"
+			},
+			{
+				"Ctrl_Prop" : "PR Excluded VDs",
+				"Value" : "None"
+			},
+			{
+				"Ctrl_Prop" : "PR MaxConcurrentPd",
+				"Value" : "255"
+			}
+		]
+	}
+}
+]
+}

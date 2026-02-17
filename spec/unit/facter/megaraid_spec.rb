@@ -166,7 +166,7 @@ describe :megaraid, type: :fact do
       expect(Facter::Util::Resolution).not_to receive(:which).with('storcli')
       expect(Facter::Util::Resolution).not_to receive(:which).with('/opt/MegaRAID/storcli/storcli')
 
-      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show J nolog').and_return(File.read('spec/fixtures/perccli_call_show_fail.json'))
+      expect(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show J nolog').and_return(File.read('spec/fixtures/storcli_call_show_fail.json'))
       expect(Facter::Util::Resolution).not_to receive(:exec).with('/example/path /call show patrolread J nolog')
       expect(Facter::Util::Resolution).not_to receive(:exec).with('/example/path /call show cc J nolog')
     end

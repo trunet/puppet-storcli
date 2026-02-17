@@ -1,0 +1,143 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-570.19.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"/c0/v1" : [
+			{
+				"DG/VD" : "1/1",
+				"TYPE" : "RAID10",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "RWBD",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "21.830 TB",
+				"Name" : ""
+			}
+		],
+		"PDs for VD 1" : [
+			{
+				"EID:Slt" : "0:0",
+				"DID" : 3,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "7.276 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD8004FRYZ-01VAEB0",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "0:1",
+				"DID" : 9,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "7.276 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD8004FRYZ-01VAEB0",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "0:2",
+				"DID" : 11,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "7.276 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD8004FRYZ-01VAEB0",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "0:3",
+				"DID" : 8,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "7.276 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD8004FRYZ-01VAEB0",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "0:4",
+				"DID" : 2,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "7.276 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD8004FRYZ-01VAEB0",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "0:5",
+				"DID" : 7,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "7.276 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "WDC WD8004FRYZ-01VAEB0",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"VD1 Properties" : {
+			"Strip Size" : "256 KB",
+			"Number of Blocks" : 46880980992,
+			"VD has Emulated PD" : "Yes",
+			"Span Depth" : 3,
+			"Number of Drives Per Span" : 2,
+			"Write Cache(initial setting)" : "WriteBack",
+			"Disk Cache Policy" : "Disk's Default",
+			"Encryption" : "None",
+			"Data Protection" : "Disabled",
+			"Active Operations" : "None",
+			"Exposed to OS" : "Yes",
+			"OS Drive Name" : "/dev/sdb",
+			"Creation Date" : "12-04-2022",
+			"Creation Time" : "03:38:22 PM",
+			"Emulation type" : "default",
+			"Cachebypass size" : "Cachebypass-64k",
+			"Cachebypass Mode" : "Cachebypass Intelligent",
+			"Is LD Ready for OS Requests" : "Yes",
+			"SCSI NAA Id" : "600112f96000040029e8596ed369acd4",
+			"Unmap Enabled" : "N/A"
+		}
+	}
+}
+]
+}

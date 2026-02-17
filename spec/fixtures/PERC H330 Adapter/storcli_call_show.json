@@ -1,0 +1,237 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.2616.0000.0000 Dec 06, 2023",
+		"Operating system" : "Linux 5.14.0-570.19.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Product Name" : "PERC H330 Adapter",
+		"Serial Number" : "1CU025F",
+		"SAS Address" : " 5f4ee0801e4f2d00",
+		"PCI Address" : "00:02:00:00",
+		"System Time" : "02/17/2026 15:59:54",
+		"Mfg. Date" : "01/08/22",
+		"Controller Time" : "02/17/2026 21:58:11",
+		"FW Package Build" : "25.5.9.0001",
+		"BIOS Version" : "6.33.01.0_4.19.08.00_0x06120304",
+		"FW Version" : "4.300.01-8369",
+		"Driver Name" : "megaraid_sas",
+		"Driver Version" : "07.727.03.00-rc1",
+		"Current Personality" : "RAID-Mode ",
+		"Vendor Id" : 4096,
+		"Device Id" : 95,
+		"SubVendor Id" : 4136,
+		"SubDevice Id" : 8004,
+		"Host Interface" : "PCI-E",
+		"Device Interface" : "SAS-12G",
+		"Bus Number" : 2,
+		"Device Number" : 0,
+		"Function Number" : 0,
+		"Domain ID" : 0,
+		"Security Protocol" : "None",
+		"Drive Groups" : 1,
+		"TOPOLOGY" : [
+			{
+				"DG" : 0,
+				"Arr" : "-",
+				"Row" : "-",
+				"EID:Slot" : "-",
+				"DID" : "-",
+				"Type" : "RAID0",
+				"State" : "Optl",
+				"BT" : "N",
+				"Size" : "931.000 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "N",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : "-",
+				"EID:Slot" : "-",
+				"DID" : "-",
+				"Type" : "RAID0",
+				"State" : "Optl",
+				"BT" : "N",
+				"Size" : "931.000 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "N",
+				"TR" : "N"
+			},
+			{
+				"DG" : 0,
+				"Arr" : 0,
+				"Row" : 0,
+				"EID:Slot" : "32:0",
+				"DID" : 0,
+				"Type" : "DRIVE",
+				"State" : "Onln",
+				"BT" : "N",
+				"Size" : "931.000 GB",
+				"PDC" : "dflt",
+				"PI" : "N",
+				"SED" : "N",
+				"DS3" : "dflt",
+				"FSpace" : "-",
+				"TR" : "N"
+			}
+		],
+		"Virtual Drives" : 1,
+		"VD LIST" : [
+			{
+				"DG/VD" : "0/0",
+				"TYPE" : "RAID0",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "NRWTD",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "931.000 GB",
+				"Name" : ""
+			}
+		],
+		"JBOD Drives" : 3,
+		"JBOD LIST" : [
+			{
+				"EID:Slt" : "32:1",
+				"DID" : 1,
+				"State" : "JBOD",
+				"DG" : "-",
+				"Size" : "931.512 GB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST1000NM004A-2MN130",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "32:2",
+				"DID" : 2,
+				"State" : "JBOD",
+				"DG" : "-",
+				"Size" : "931.512 GB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST1000NM004A-2MN130",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "32:3",
+				"DID" : 3,
+				"State" : "JBOD",
+				"DG" : "-",
+				"Size" : "931.512 GB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST1000NM004A-2MN130",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"Physical Drives" : 4,
+		"PD LIST" : [
+			{
+				"EID:Slt" : "32:0",
+				"DID" : 0,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "931.000 GB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "HUS722T1TALA600",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "32:1",
+				"DID" : 1,
+				"State" : "JBOD",
+				"DG" : "-",
+				"Size" : "931.512 GB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST1000NM004A-2MN130",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "32:2",
+				"DID" : 2,
+				"State" : "JBOD",
+				"DG" : "-",
+				"Size" : "931.512 GB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST1000NM004A-2MN130",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "32:3",
+				"DID" : 3,
+				"State" : "JBOD",
+				"DG" : "-",
+				"Size" : "931.512 GB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST1000NM004A-2MN130",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"Enclosures" : 1,
+		"Enclosure LIST" : [
+			{
+				"EID" : 32,
+				"State" : "OK",
+				"Slots" : 4,
+				"PD" : 4,
+				"PS" : 0,
+				"Fans" : 0,
+				"TSs" : 0,
+				"Alms" : 0,
+				"SIM" : 0,
+				"Port#" : "00 x1",
+				"ProdID" : "BP14G+",
+				"VendorSpecific" : " ,   ?"
+			}
+		]
+	}
+}
+]
+}
+

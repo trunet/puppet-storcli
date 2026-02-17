@@ -1,0 +1,117 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-570.19.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Product Name" : "HPE MR416i-p Gen10+",
+		"Serial Number" : "PWTXP0ABII80KH",
+		"PCI Slot Number" : 2,
+		"SAS Address" : " 500062b215d52e00",
+		"PCI Address" : "00:61:00:00",
+		"System Time" : "02/17/2026 16:06:20",
+		"Mfg. Date" : "06/19/23",
+		"Controller Time" : "02/17/2026 22:06:09",
+		"FW Package Build" : "52.22.3-4650",
+		"BIOS Version" : "7.22.00.0_0x07160300",
+		"FW Version" : "5.220.03-3739",
+		"Driver Name" : "megaraid_sas",
+		"Driver Version" : "07.727.03.00-rc1",
+		"Current Personality" : "RAID-Mode ",
+		"Vendor Id" : 4096,
+		"Device Id" : 4322,
+		"SubVendor Id" : 5520,
+		"SubDevice Id" : 659,
+		"Host Interface" : "PCI-E",
+		"Device Interface" : "SAS-12G",
+		"Bus Number" : 97,
+		"Device Number" : 0,
+		"Function Number" : 0,
+		"Domain ID" : 0,
+		"Security Protocol" : "None",
+		"JBOD Drives" : 2,
+		"JBOD LIST" : [
+			{
+				"ID" : 1,
+				"EID:Slt" : "252:1",
+				"DID" : 0,
+				"State" : "Onln",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"Size" : "279.396 GiB",
+				"SeSz" : "512B",
+				"Model" : "EG000300JWEBF   ",
+				"Vendor" : "HPE     ",
+				"Port" : "Port 1I "
+			},
+			{
+				"ID" : 2,
+				"EID:Slt" : "252:2",
+				"DID" : 1,
+				"State" : "Onln",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"Size" : "279.396 GiB",
+				"SeSz" : "512B",
+				"Model" : "EG000300JWEBF   ",
+				"Vendor" : "HPE     ",
+				"Port" : "Port 1I "
+			}
+		],
+		"Physical Drives" : 2,
+		"Drive LIST" : [
+			{
+				"EID:Slt" : "252:1",
+				"DID" : 0,
+				"State" : "Onln",
+				"DG" : "-",
+				"Size" : "300.00 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "EG000300JWEBF   ",
+				"Sp" : "U",
+				"Type" : "JBOD"
+			},
+			{
+				"EID:Slt" : "252:2",
+				"DID" : 1,
+				"State" : "Onln",
+				"DG" : "-",
+				"Size" : "300.00 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "EG000300JWEBF   ",
+				"Sp" : "U",
+				"Type" : "JBOD"
+			}
+		],
+		"Enclosures" : 1,
+		"Enclosure LIST" : [
+			{
+				"EID" : 252,
+				"State" : "OK",
+				"Slots" : 8,
+				"PD" : 2,
+				"PS" : 0,
+				"Fans" : 0,
+				"TSs" : 0,
+				"Alms" : 0,
+				"SIM" : 0,
+				"Port#" : "1I"
+			}
+		]
+	}
+}
+]
+}

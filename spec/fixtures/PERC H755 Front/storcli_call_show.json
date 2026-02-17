@@ -1,0 +1,129 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.2616.0000.0000 Dec 06, 2023",
+		"Operating system" : "Linux 6.1.113-1.el9.elrepo.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Product Name" : "PERC H755 Front",
+		"Serial Number" : "34A00OF",
+		"SAS Address" : " 5f4ee0805636cf00",
+		"PCI Address" : "00:4a:00:00",
+		"System Time" : "02/17/2026 15:59:53",
+		"Mfg. Date" : "04/16/23",
+		"Controller Time" : "02/17/2026 21:59:56",
+		"FW Package Build" : "52.21.0-4606",
+		"BIOS Version" : "7.21.01.0_0x07150200",
+		"FW Version" : "5.210.02-3721",
+		"Driver Name" : "megaraid_sas",
+		"Driver Version" : "07.719.03.00-rc1",
+		"Current Personality" : "RAID-Mode ",
+		"Vendor Id" : 4096,
+		"Device Id" : 4322,
+		"SubVendor Id" : 4136,
+		"SubDevice Id" : 6881,
+		"Host Interface" : "PCI-E",
+		"Device Interface" : "SAS-12G",
+		"Bus Number" : 74,
+		"Device Number" : 0,
+		"Function Number" : 0,
+		"Domain ID" : 0,
+		"Security Protocol" : "None",
+		"JBOD Drives" : 2,
+		"JBOD LIST" : [
+			{
+				"ID" : 0,
+				"EID:Slt" : "252:0",
+				"DID" : 1,
+				"State" : "Onln",
+				"Intf" : "SAS",
+				"Med" : "SSD",
+				"Size" : "894.252 GB",
+				"SeSz" : "512B",
+				"Model" : "KRM6VVUG960G    ",
+				"Vendor" : "KIOXIA  ",
+				"Port" : "00 x1"
+			},
+			{
+				"ID" : 1,
+				"EID:Slt" : "252:1",
+				"DID" : 0,
+				"State" : "Onln",
+				"Intf" : "SAS",
+				"Med" : "SSD",
+				"Size" : "894.252 GB",
+				"SeSz" : "512B",
+				"Model" : "KRM6VVUG960G    ",
+				"Vendor" : "KIOXIA  ",
+				"Port" : "00 x1"
+			}
+		],
+		"Physical Drives" : 2,
+		"PD LIST" : [
+			{
+				"EID:Slt" : "252:0",
+				"DID" : 1,
+				"State" : "Onln",
+				"DG" : "-",
+				"Size" : "894.252 GB",
+				"Intf" : "SAS",
+				"Med" : "SSD",
+				"SED" : "Y",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "KRM6VVUG960G    ",
+				"Sp" : "U",
+				"Type" : "JBOD"
+			},
+			{
+				"EID:Slt" : "252:1",
+				"DID" : 0,
+				"State" : "Onln",
+				"DG" : "-",
+				"Size" : "894.252 GB",
+				"Intf" : "SAS",
+				"Med" : "SSD",
+				"SED" : "Y",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "KRM6VVUG960G    ",
+				"Sp" : "U",
+				"Type" : "JBOD"
+			}
+		],
+		"Enclosures" : 1,
+		"Enclosure LIST" : [
+			{
+				"EID" : 252,
+				"State" : "OK",
+				"Slots" : 16,
+				"PD" : 2,
+				"PS" : 0,
+				"Fans" : 0,
+				"TSs" : 0,
+				"Alms" : 0,
+				"SIM" : 0,
+				"Port#" : "-",
+				"ProdID" : "BP_PSV",
+				"VendorSpecific" : " "
+			}
+		],
+		"BBU_Info" : [
+			{
+				"Model" : "BBU",
+				"State" : "Optimal",
+				"RetentionTime" : "0 hour(s)",
+				"Temp" : "23C",
+				"Mode" : "-",
+				"MfgDate" : "0/00/00"
+			}
+		]
+	}
+}
+]
+}
+

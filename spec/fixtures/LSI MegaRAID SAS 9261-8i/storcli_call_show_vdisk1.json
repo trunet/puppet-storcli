@@ -1,0 +1,141 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-570.32.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"/c0/v1" : [
+			{
+				"DG/VD" : "1/1",
+				"TYPE" : "RAID10",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "NRWBD",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "10.913 TB",
+				"Name" : ""
+			}
+		],
+		"PDs for VD 1" : [
+			{
+				"EID:Slt" : "252:2",
+				"DID" : 11,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "3.637 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "HGST HUS726040ALE614",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:3",
+				"DID" : 10,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "3.637 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "HGST HUS726040ALE614",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:4",
+				"DID" : 13,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "3.637 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "HGST HUS726040ALE614",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:5",
+				"DID" : 15,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "3.637 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "HGST HUS726040ALE614",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:6",
+				"DID" : 14,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "3.637 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "HGST HUS726040ALE614",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "252:7",
+				"DID" : 12,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "3.637 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "HGST HUS726040ALE614",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"VD1 Properties" : {
+			"Strip Size" : "64 KB",
+			"Number of Blocks" : 23437498368,
+			"VD has Emulated PD" : "Yes",
+			"Span Depth" : 3,
+			"Number of Drives Per Span" : 2,
+			"Write Cache(initial setting)" : "WriteBack",
+			"Disk Cache Policy" : "Disk's Default",
+			"Encryption" : "None",
+			"Data Protection" : "None",
+			"Active Operations" : "None",
+			"Exposed to OS" : "Yes",
+			"OS Drive Name" : "/dev/sdb",
+			"Creation Date" : "16-01-2026",
+			"Creation Time" : "07:30:06 PM",
+			"Emulation type" : "default",
+			"Is LD Ready for OS Requests" : "Yes",
+			"SCSI NAA Id" : "600605b00ac8d31030fd4e3e75ac08d6",
+			"Unmap Enabled" : "N/A"
+		}
+	}
+}
+]
+}

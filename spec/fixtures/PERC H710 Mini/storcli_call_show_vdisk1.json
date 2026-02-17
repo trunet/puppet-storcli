@@ -1,0 +1,81 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.2616.0000.0000 Dec 06, 2023",
+		"Operating system" : "Linux 5.14.0-570.32.1.el9_6.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"/c0/v1" : [
+			{
+				"DG/VD" : "1/1",
+				"TYPE" : "RAID1",
+				"State" : "Optl",
+				"Access" : "RW",
+				"Consist" : "Yes",
+				"Cache" : "NRWTD",
+				"Cac" : "-",
+				"sCC" : "ON",
+				"Size" : "1.818 TB",
+				"Name" : "data"
+			}
+		],
+		"PDs for VD 1" : [
+			{
+				"EID:Slt" : "32:2",
+				"DID" : 2,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "1.818 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "TOSHIBA MG03ACA200",
+				"Sp" : "U",
+				"Type" : "-"
+			},
+			{
+				"EID:Slt" : "32:3",
+				"DID" : 3,
+				"State" : "Onln",
+				"DG" : 1,
+				"Size" : "1.818 TB",
+				"Intf" : "SATA",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "TOSHIBA MG03ACA200",
+				"Sp" : "U",
+				"Type" : "-"
+			}
+		],
+		"VD1 Properties" : {
+			"Strip Size" : "64 KB",
+			"Number of Blocks" : 3905945600,
+			"Span Depth" : 1,
+			"Number of Drives Per Span" : 2,
+			"Write Cache(initial setting)" : "WriteThrough",
+			"Disk Cache Policy" : "Enabled",
+			"Encryption" : "None",
+			"Data Protection" : "None",
+			"Active Operations" : "None",
+			"Exposed to OS" : "Yes",
+			"OS Drive Name" : "/dev/sdb",
+			"Creation Date" : "N/A",
+			"Creation Time" : "N/A",
+			"Emulation type" : "default",
+			"Is LD Ready for OS Requests" : "Yes",
+			"SCSI NAA Id" : "6c81f660e70f8200ff00002c02d722f1",
+			"Unmap Enabled" : "N/A"
+		}
+	}
+}
+]
+}
+
