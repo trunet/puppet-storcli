@@ -464,8 +464,8 @@ describe :storcli, type: :fact do
                 if vd_props_data['Exposed to OS']
                   raw = vd_props_data['Exposed to OS']
                   expected = case raw
-                             when /\AYes\z/i then true
-                             when /\ANo\z/i then false
+                             when %r{\AYes\z}i then true
+                             when %r{\ANo\z}i then false
                              else raw
                              end
                   expect(props['exposed_to_os']).to eq(expected)
@@ -538,7 +538,7 @@ describe :storcli, type: :fact do
         'CC Next Starttime'   => 'cc_next_starttime',
         'Boot With Pinned Cache' => 'boot_with_pinned_cache',
         'Cache Flush Interval'   => 'cache_flush_interval',
-        'Perf Mode'           => 'perf_mode',
+        'Perf Mode' => 'perf_mode',
       }.each do |input, expected|
         it "converts '#{input}' to '#{expected}'" do
           expect(storcli.send(:to_snake_case, input)).to eq(expected)
