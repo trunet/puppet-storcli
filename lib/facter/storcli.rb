@@ -76,7 +76,7 @@ class Storcli
   # parse failure. Parse errors are logged at debug level so they appear with
   # `facter --debug` without cluttering normal Puppet runs.
   def exec_json(tool, args)
-    raw = Dir.chdir("/tmp") { Facter::Util::Resolution.exec("#{tool} #{args} J nolog") }
+    raw = Dir.chdir('/tmp') { Facter::Util::Resolution.exec("#{tool} #{args} J nolog") }
     return nil unless raw && !raw.empty?
 
     JSON.parse(raw)
@@ -347,8 +347,8 @@ class Storcli
     return nil if val.nil?
 
     case val.to_s
-    when /\AYes\z/i  then true
-    when /\ANo\z/i   then false
+    when %r{\AYes\z}i  then true
+    when %r{\ANo\z}i   then false
     else val
     end
   end
@@ -357,10 +357,9 @@ class Storcli
   # Examples: 'Rebuild Rate' → 'rebuild_rate', 'AutoRebuild' → 'auto_rebuild',
   #           'PR Mode' → 'pr_mode', 'CC Next Starttime' → 'cc_next_starttime'
   def to_snake_case(str)
-    str.gsub(/([a-z\d])([A-Z])/, '\1_\2')   # camelCase boundaries
-       .gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2') # ABCDef → ABC_Def
-       .tr(' ', '_')                           # spaces to underscores
-       .gsub(/_+/, '_')                        # collapse multiple underscores
+    str.gsub(%r{([a-z\d])([A-Z])}, '\1_\2') # camelCase boundaries
+       .gsub(%r{([A-Z]+)([A-Z][a-z])}, '\1_\2') # ABCDef → ABC_Def
+       .tr(' ', '_').squeeze('_') # collapse multiple underscores
        .downcase
   end
 
@@ -375,10 +374,10 @@ class Storcli
 
     # Try boolean coercion for common storcli toggle strings
     case val.to_s
-    when /\AOn\z/i       then true
-    when /\AOff\z/i      then false
-    when /\AEnabled\z/i  then true
-    when /\ADisabled\z/i then false
+    when %r{\AOn\z}i       then true
+    when %r{\AOff\z}i      then false
+    when %r{\AEnabled\z}i  then true
+    when %r{\ADisabled\z}i then false
     else val
     end
   end
