@@ -1,6 +1,6 @@
 {
   "name": "trunet-storcli",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "author": "Wagner Sartori Junior",
   "summary": "Puppet module to generate facts with types and providers to manage LSI MegaRAID controllers",
   "license": "Apache-2.0",
@@ -15,54 +15,19 @@
   ],
   "operatingsystem_support": [
     {
-      "operatingsystem": "CentOS",
-      "operatingsystemrelease": [
-        "7"
-      ]
+      "operatingsystem": "RedHat"
     },
     {
-      "operatingsystem": "OracleLinux",
-      "operatingsystemrelease": [
-        "7"
-      ]
+      "operatingsystem": "Debian"
     },
     {
-      "operatingsystem": "RedHat",
-      "operatingsystemrelease": [
-        "8",
-        "9",
-        "10"
-      ]
+      "operatingsystem": "Ubuntu"
     },
     {
-      "operatingsystem": "Scientific",
-      "operatingsystemrelease": [
-        "7"
-      ]
+      "operatingsystem": "Fedora"
     },
     {
-      "operatingsystem": "Debian",
-      "operatingsystemrelease": [
-        "10"
-      ]
-    },
-    {
-      "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [
-        "18.04"
-      ]
-    },
-    {
-      "operatingsystem": "Fedora",
-      "operatingsystemrelease": [
-        "29"
-      ]
-    },
-    {
-      "operatingsystem": "SLES",
-      "operatingsystemrelease": [
-        "15"
-      ]
+      "operatingsystem": "SLES"
     }
   ],
   "requirements": [
@@ -71,7 +36,7 @@
       "version_requirement": ">= 6.21.0 < 9.0.0"
     }
   ],
-  "pdk-version": "3.6.0 (gcf442ed)",
-  "template-url": "pdk-default#3.6.0",
-  "template-ref": "tags/3.6.0-0-gfa96b82"
+  "pdk-version": "3.6.1 (ga18bc44)",
+  "template-url": "pdk-default#3.6.1",
+  "template-ref": "tags/3.6.1-0-gb9426e5"
 }
