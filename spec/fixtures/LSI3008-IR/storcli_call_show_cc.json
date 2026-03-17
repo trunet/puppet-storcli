@@ -1,0 +1,54 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-611.20.1.el9_7.x86_64",
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Controller Properties" : [
+			{
+				"Ctrl_Prop" : "CC Operation Mode",
+				"Value" : "Concurrent"
+			},
+			{
+				"Ctrl_Prop" : "CC Execution Delay",
+				"Value" : "672 hours"
+			},
+			{
+				"Ctrl_Prop" : "CC Next Starttime",
+				"Value" : "02/19/2026, 15:00:00"
+			},
+			{
+				"Ctrl_Prop" : "CC Current State",
+				"Value" : "Stopped"
+			},
+			{
+				"Ctrl_Prop" : "CC Number of iterations",
+				"Value" : "89"
+			},
+			{
+				"Ctrl_Prop" : "CC Number of VD completed",
+				"Value" : "1"
+			},
+			{
+				"Ctrl_Prop" : "CC Excluded VDs",
+				"Value" : "None"
+			}
+		]
+	}
+},
+{
+	"Command Status" : {
+		"CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+		"Operating system" : "Linux 5.14.0-611.20.1.el9_7.x86_64",
+		"Controller" : 1,
+		"Status" : "Failure",
+		"Description" : "Un-supported Command"
+	}
+}
+]
+}

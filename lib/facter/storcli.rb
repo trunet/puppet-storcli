@@ -37,8 +37,11 @@ require 'timeout'
 
 # Main class for MegaRAID storcli fact collection
 class Storcli
+  # @return [String] sysfs path used to detect MegaRAID SAS hardware
   MEGARAID_SAS_DRIVER_PATH = '/sys/bus/pci/drivers/megaraid_sas' unless defined?(MEGARAID_SAS_DRIVER_PATH)
+  # @return [String] sysfs path used to detect MPT3SAS hardware
   MPT3SAS_DRIVER_PATH = '/sys/bus/pci/drivers/mpt3sas' unless defined?(MPT3SAS_DRIVER_PATH)
+  # @return [Integer] timeout in seconds for storcli command execution
   STORCLI_TIMEOUT = 60 unless defined?(STORCLI_TIMEOUT)
 
   # Hardware presence detection
