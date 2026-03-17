@@ -1,5 +1,5 @@
 ---
-storcli::package_manage: "%{facts.megaraid.present?}"
+storcli::package_manage: "%{facts.storcli.present}"
 storcli::package_name:
   - 'storcli'
 storcli::package_ensure: present
