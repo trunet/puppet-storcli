@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 * Removed `megaraid` fact
 * Removed storcli::configure class
+* No longer makes /usr/local/sbin/storcli
 
 **Features**
 
