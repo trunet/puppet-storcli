@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 3.0.0
+
+**BREAKING CHANGES**
+
+* Removed `megaraid` fact
+
 ## Release 2.0.0
 
 **BREAKING CHANGES**
