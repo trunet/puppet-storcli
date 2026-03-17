@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 **BREAKING CHANGES**
 
 * Removed `megaraid` fact
+* Removed storcli::configure class
+
+**Features**
+
+* Configuration now happens through puppet native types
+* Hiera/ENC parameters for storcli config options
 
 ## Release 2.0.0
 

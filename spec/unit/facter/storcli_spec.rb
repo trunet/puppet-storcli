@@ -471,6 +471,11 @@ describe :storcli, type: :fact do
                   expect(props['exposed_to_os']).to eq(expected)
                 end
 
+                # Check data_protection (stays as string — tri-state: None/Disabled/Enabled)
+                if vd_props_data['Data Protection']
+                  expect(props['data_protection']).to eq(vd_props_data['Data Protection'])
+                end
+
                 # Check disk_cache_policy normalization
                 if vd_props_data['Disk Cache Policy']
                   disk_cache = vd_props_data['Disk Cache Policy']

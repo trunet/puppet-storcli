@@ -1,0 +1,83 @@
+{
+"Controllers":[
+{
+        "Command Status" : {
+                "CLI Version" : "007.3503.0000.0000 Aug 05, 2025",
+                "Operating system" : "Linux 5.14.0-570.19.1.el9_6.x86_64",
+                "Controller" : 0,
+                "Status" : "Success",
+                "Description" : "None"
+        },
+        "Response Data" : {
+                "/c0/v239" : [
+                        {
+                                "DG/VD" : "1/239",
+                                "TYPE" : "RAID1",
+                                "State" : "Optl",
+                                "Access" : "RW",
+                                "Consist" : "Yes",
+                                "Cache" : "RWBD",
+                                "Cac" : "-",
+                                "sCC" : "ON",
+                                "Size" : "1.746 TB",
+                                "Name" : ""
+                        }
+                ],
+                "PDs for VD 239" : [
+                        {
+                                "EID:Slt" : "252:0",
+                                "DID" : 4,
+                                "State" : "Onln",
+                                "DG" : 1,
+                                "Size" : "1.746 TB",
+                                "Intf" : "SATA",
+                                "Med" : "SSD",
+                                "SED" : "Y",
+                                "PI" : "N",
+                                "SeSz" : "512B",
+                                "Model" : "Micron_5400_MTFDDAK1T9TGA",
+                                "Sp" : "U",
+                                "Type" : "-"
+                        },
+                        {
+                                "EID:Slt" : "252:1",
+                                "DID" : 5,
+                                "State" : "Onln",
+                                "DG" : 1,
+                                "Size" : "1.746 TB",
+                                "Intf" : "SATA",
+                                "Med" : "SSD",
+                                "SED" : "Y",
+                                "PI" : "N",
+                                "SeSz" : "512B",
+                                "Model" : "Micron_5400_MTFDDAK1T9TGA",
+                                "Sp" : "U",
+                                "Type" : "-"
+                        }
+                ],
+                "VD239 Properties" : {
+                        "Strip Size" : "256 KB",
+                        "Number of Blocks" : 3749642240,
+                        "VD has Emulated PD" : "Yes",
+                        "Span Depth" : 1,
+                        "Number of Drives Per Span" : 2,
+                        "Write Cache(initial setting)" : "WriteBack",
+                        "Disk Cache Policy" : "Disk's Default",
+                        "Encryption" : "None",
+                        "Data Protection" : "None",
+                        "Active Operations" : "None",
+                        "Exposed to OS" : "Yes",
+                        "OS Drive Name" : "/dev/sda",
+                        "Creation Date" : "06-12-2024",
+                        "Creation Time" : "02:46:30 PM",
+                        "Emulation type" : "default",
+                        "Cachebypass size" : "Cachebypass-64k",
+                        "Cachebypass Mode" : "Cachebypass Intelligent",
+                        "Is LD Ready for OS Requests" : "Yes",
+                        "SCSI NAA Id" : "600062b21e2878c02ee5cac683198cd7",
+                        "Unmap Enabled" : "No"
+                }
+        }
+}
+]
+}
