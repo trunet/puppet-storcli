@@ -62,7 +62,7 @@ class Storcli
     # Deduplicate paths in case symlinks point to the same binary
     seen_paths = {}
     candidates.each do |name|
-      path = Facter::Util::Resolution.which(name)
+      path = Facter::Core::Execution.which(name)
       next unless path
       next if seen_paths[path]
 
@@ -79,7 +79,7 @@ class Storcli
   # parse failure. Parse errors are logged at debug level so they appear with
   # `facter --debug` without cluttering normal Puppet runs.
   def exec_json(tool, args)
-    raw = Dir.chdir('/tmp') { Facter::Util::Resolution.exec("#{tool} #{args} J nolog") }
+    raw = Dir.chdir('/tmp') { Facter::Core::Execution.execute("#{tool} #{args} J nolog", on_fail: nil) }
     return nil unless raw && !raw.empty?
 
     JSON.parse(raw)

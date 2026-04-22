@@ -96,50 +96,53 @@ describe :storcli, type: :fact do
     # Mock which for appropriate tools
     tool_path = '/example/path'
     if fixture_info[:is_perc]
-      allow(Facter::Util::Resolution).to receive(:which).with('perccli64').and_return(tool_path)
-      allow(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/perccli/perccli64').and_return(nil)
-      allow(Facter::Util::Resolution).to receive(:which).with('perccli').and_return(nil)
-      allow(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/perccli/perccli').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('perccli64').and_return(tool_path)
+      allow(Facter::Core::Execution).to receive(:which).with('/opt/MegaRAID/perccli/perccli64').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('perccli').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('/opt/MegaRAID/perccli/perccli').and_return(nil)
     else
-      allow(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return(tool_path)
-      allow(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli64').and_return(nil)
-      allow(Facter::Util::Resolution).to receive(:which).with('storcli').and_return(nil)
-      allow(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('storcli64').and_return(tool_path)
+      allow(Facter::Core::Execution).to receive(:which).with('/opt/MegaRAID/storcli/storcli64').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('storcli').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('/opt/MegaRAID/storcli/storcli').and_return(nil)
     end
 
     # Mock exec calls
     fixture_name = fixture_info[:fixture_name]
 
+    # Pass through any execute calls not matched below (e.g. Facter-internal uname calls)
+    allow(Facter::Core::Execution).to receive(:execute).and_call_original
+
     # Main controller info
     call_show_path = File.join('spec/fixtures', fixture_name, 'storcli_call_show.json')
-    allow(Facter::Util::Resolution).to receive(:exec).with("#{tool_path} /call show J nolog")
-                                                     .and_return(File.read(call_show_path))
+    allow(Facter::Core::Execution).to receive(:execute).with("#{tool_path} /call show J nolog", on_fail: nil)
+                                                       .and_return(File.read(call_show_path))
 
     # Patrol read info
     pr_path = File.join('spec/fixtures', fixture_name, 'storcli_call_show_patrolread.json')
     if File.exist?(pr_path)
-      allow(Facter::Util::Resolution).to receive(:exec).with("#{tool_path} /call show patrolread J nolog")
-                                                       .and_return(File.read(pr_path))
+      allow(Facter::Core::Execution).to receive(:execute).with("#{tool_path} /call show patrolread J nolog", on_fail: nil)
+                                                         .and_return(File.read(pr_path))
     else
-      allow(Facter::Util::Resolution).to receive(:exec).with("#{tool_path} /call show patrolread J nolog")
-                                                       .and_return(nil)
+      allow(Facter::Core::Execution).to receive(:execute).with("#{tool_path} /call show patrolread J nolog", on_fail: nil)
+                                                         .and_return(nil)
     end
 
     # Consistency check info
     cc_path = File.join('spec/fixtures', fixture_name, 'storcli_call_show_cc.json')
     if File.exist?(cc_path)
-      allow(Facter::Util::Resolution).to receive(:exec).with("#{tool_path} /call show cc J nolog")
-                                                       .and_return(File.read(cc_path))
+      allow(Facter::Core::Execution).to receive(:execute).with("#{tool_path} /call show cc J nolog", on_fail: nil)
+                                                         .and_return(File.read(cc_path))
     else
-      allow(Facter::Util::Resolution).to receive(:exec).with("#{tool_path} /call show cc J nolog")
-                                                       .and_return(nil)
+      allow(Facter::Core::Execution).to receive(:execute).with("#{tool_path} /call show cc J nolog", on_fail: nil)
+                                                         .and_return(nil)
     end
 
     # Controller settings and BBU (no fixtures, return nil)
-    allow(Facter::Util::Resolution).to receive(:exec).with("#{tool_path} /call show all J nolog")
-                                                     .and_return(nil)
-    allow(Facter::Util::Resolution).to receive(:exec).with("#{tool_path} /call show bbu J nolog")
-                                                     .and_return(nil)
+    allow(Facter::Core::Execution).to receive(:execute).with("#{tool_path} /call show all J nolog", on_fail: nil)
+                                                       .and_return(nil)
+    allow(Facter::Core::Execution).to receive(:execute).with("#{tool_path} /call show bbu J nolog", on_fail: nil)
+                                                       .and_return(nil)
 
     # Mock VD detail calls
     fixture_info[:controller_info].each do |controller_id, controller_data|
@@ -158,12 +161,12 @@ describe :storcli, type: :fact do
         vd_path = File.join('spec/fixtures', fixture_name, vd_file)
 
         if File.exist?(vd_path)
-          allow(Facter::Util::Resolution).to receive(:exec)
-            .with("#{tool_path} /c#{controller_id}/v#{vd_id} show all J nolog")
+          allow(Facter::Core::Execution).to receive(:execute)
+            .with("#{tool_path} /c#{controller_id}/v#{vd_id} show all J nolog", on_fail: nil)
             .and_return(File.read(vd_path))
         else
-          allow(Facter::Util::Resolution).to receive(:exec)
-            .with("#{tool_path} /c#{controller_id}/v#{vd_id} show all J nolog")
+          allow(Facter::Core::Execution).to receive(:execute)
+            .with("#{tool_path} /c#{controller_id}/v#{vd_id} show all J nolog", on_fail: nil)
             .and_return(nil)
         end
       end
@@ -193,8 +196,8 @@ describe :storcli, type: :fact do
     end
 
     it 'does not call which or exec' do
-      expect(Facter::Util::Resolution).not_to receive(:which)
-      expect(Facter::Util::Resolution).not_to receive(:exec)
+      expect(Facter::Core::Execution).not_to receive(:which).with(String)
+      expect(Facter::Core::Execution).not_to receive(:execute).with(%r{storcli|perccli}, anything)
       fact.value
     end
   end
@@ -206,10 +209,10 @@ describe :storcli, type: :fact do
       allow(Dir).to receive(:exist?).with('/sys/bus/pci/drivers/mpt3sas').and_return(true)
       allow(Facter).to receive(:value).with(:dmi).and_return({ 'manufacturer' => 'Supermicro' })
 
-      allow(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return(nil)
-      allow(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli64').and_return(nil)
-      allow(Facter::Util::Resolution).to receive(:which).with('storcli').and_return(nil)
-      allow(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('storcli64').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('/opt/MegaRAID/storcli/storcli64').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('storcli').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('/opt/MegaRAID/storcli/storcli').and_return(nil)
     end
 
     it 'returns present false only' do
@@ -217,7 +220,7 @@ describe :storcli, type: :fact do
     end
 
     it 'does not call exec' do
-      expect(Facter::Util::Resolution).not_to receive(:exec)
+      expect(Facter::Core::Execution).not_to receive(:execute).with(%r{storcli|perccli}, anything)
       fact.value
     end
   end
@@ -230,17 +233,18 @@ describe :storcli, type: :fact do
       allow(Dir).to receive(:chdir).with('/tmp').and_yield
       allow(Facter).to receive(:value).with(:dmi).and_return({ 'manufacturer' => 'Supermicro' })
 
-      allow(Facter::Util::Resolution).to receive(:which).with('storcli64').and_return('/example/path')
-      allow(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli64').and_return(nil)
-      allow(Facter::Util::Resolution).to receive(:which).with('storcli').and_return(nil)
-      allow(Facter::Util::Resolution).to receive(:which).with('/opt/MegaRAID/storcli/storcli').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('storcli64').and_return('/example/path')
+      allow(Facter::Core::Execution).to receive(:which).with('/opt/MegaRAID/storcli/storcli64').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('storcli').and_return(nil)
+      allow(Facter::Core::Execution).to receive(:which).with('/opt/MegaRAID/storcli/storcli').and_return(nil)
 
-      allow(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show J nolog')
-                                                       .and_return(File.read('spec/fixtures/storcli_call_show_fail.json'))
-      allow(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show patrolread J nolog')
-                                                       .and_return(nil)
-      allow(Facter::Util::Resolution).to receive(:exec).with('/example/path /call show cc J nolog')
-                                                       .and_return(nil)
+      allow(Facter::Core::Execution).to receive(:execute).and_call_original
+      allow(Facter::Core::Execution).to receive(:execute).with('/example/path /call show J nolog', on_fail: nil)
+                                                         .and_return(File.read('spec/fixtures/storcli_call_show_fail.json'))
+      allow(Facter::Core::Execution).to receive(:execute).with('/example/path /call show patrolread J nolog', on_fail: nil)
+                                                         .and_return(nil)
+      allow(Facter::Core::Execution).to receive(:execute).with('/example/path /call show cc J nolog', on_fail: nil)
+                                                         .and_return(nil)
     end
 
     it 'returns present false only' do
